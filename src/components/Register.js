@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Container, Typography, CircularProgress, Box } from '@mui/material';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -49,32 +50,52 @@ function Register() {
     };
 
     return (
-        <div className="container">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit} className="form-container">
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Registering...' : 'Register'}
-                </button>
-            </form>
-        </div>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 8, p: 4, boxShadow: 3, borderRadius: 2, textAlign: 'center' }}>
+                <Typography variant="h4" gutterBottom>
+                    Register
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="Username"
+                        variant="outlined"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="Email"
+                        type="email"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Box sx={{ mt: 4 }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            disabled={loading}
+                            fullWidth
+                        >
+                            {loading ? <CircularProgress size={24} /> : 'Register'}
+                        </Button>
+                    </Box>
+                </form>
+            </Box>
+        </Container>
     );
 }
 

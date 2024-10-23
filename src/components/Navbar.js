@@ -92,24 +92,18 @@ function Navbar() {
                         <li><Link to="/profile">Profile</Link></li>
                         <li>
                             <div className="notification-dropdown">
-                                <button className="notification-button">Notifications
-                                    ({notifications.filter(notification => !notification.isRead).length})
-                                </button>
+                                <button className="notification-button">Notifications ({notifications.length})</button>
                                 <div className="notification-dropdown-content">
                                     {notifications.length === 0 ? (
                                         <p>No notifications</p>
                                     ) : (
                                         <>
-                                            <button onClick={handleMarkAllAsRead} className="mark-all-button">Mark All
-                                                as Read
-                                            </button>
+                                            <button onClick={handleMarkAllAsRead} className="mark-all-button">Mark All as Read</button>
                                             {notifications.map((notification) => (
-                                                <div key={notification.id}
-                                                     className={`notification-item ${notification.isRead ? 'read' : 'unread'}`}>
+                                                <div key={notification.id} className={`notification-item ${notification.isRead ? 'read' : 'unread'}`}>
                                                     <p>{notification.message}</p>
                                                     {!notification.isRead && (
-                                                        <button onClick={() => handleMarkAsRead(notification.id)}>Mark
-                                                            as Read</button>
+                                                        <button onClick={() => handleMarkAsRead(notification.id)}>Mark as Read</button>
                                                     )}
                                                 </div>
                                             ))}

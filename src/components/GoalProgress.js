@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import ProgressChart from '../components/ProgressChart';
+import GoalProgressChart from './GoalProgressChart';
 import '../styles.css';
 
 function GoalProgress() {
-    const { isAuthenticated, user, jwtToken } = useContext(AuthContext);
+    const { jwtToken, user } = useContext(AuthContext);
     const [goalProgress, setGoalProgress] = useState([]);
 
     useEffect(() => {
-        if (isAuthenticated && user && jwtToken) {
-            const fetchGoalProgress = async () => {
+        const fetchGoalProgress = async () => {
+            if (user && jwtToken) {
                 try {
                     const response = await axios.get(`http://localhost:8080/api/goals/progress/user/${user.id}`, {
                         headers: {
@@ -21,27 +21,30 @@ function GoalProgress() {
                 } catch (error) {
                     console.error('Failed to fetch goal progress:', error);
                 }
-            };
-            fetchGoalProgress();
-        }
-    }, [isAuthenticated, user, jwtToken]);
+            }
+        };
+
+        fetchGoalProgress();
+    }, [user, jwtToken]);
 
     return (
         <div className="goal-progress-container">
             <h2>Goal Progress</h2>
-            <div className="progress-charts">
-                {goalProgress.length === 0 ? (
-                    <p>No goals to display progress.</p>
-                ) : (
-                    goalProgress.map((goal) => (
-                        <ProgressChart
-                            key={goal.id}
-                            goalName={goal.goalName}
-                            progress={goal.progress}
-                        />
-                    ))
-                )}
-            </div>
+            {goalProgress.length === 0 ? (
+                <p>No goals found</p>
+            ) : (
+                <>
+                    <GoalProgressChart goalProgress={goalProgress} />
+                    <div className="goal-cards-container">
+                        {goalProgress.map((goal) => (
+                            <div key={goal.goalId} className="goal-progress-card">
+                                <h3>{goal.goalDescription}</h3>
+                                <p>Progress: {goal.progress}%</p>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     );
 }

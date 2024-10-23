@@ -462,3 +462,164 @@ label {
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.goal-task-list {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.create-task-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.create-task-button:hover {
+    background-color: #0056b3;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+.goal-progress-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.goal-progress-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    text-align: center;
+    color: white;
+    line-height: 25px;
+    transition: width 0.5s ease-in-out;
+}
+
+.goal-task-list {
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.task-item.completed {
+    background: #d4edda;
+}
+
+.toggle-task-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-task-button:hover {
+    background-color: #0056b3;
+}
+.goal-progress-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.goal-progress-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+.goal-progress-container {
+    padding: 20px;
+}
+
+.chart-container {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.goal-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.goal-progress-card {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.goal-progress-card h3 {
+    margin: 0 0 10px;
+}
+
+.goal-progress-card p {
+    margin: 0;
+}
+

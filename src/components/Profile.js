@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles.css';
 import { AuthContext } from '../context/AuthContext';
+import { TextField, Button, Container, Typography, CircularProgress } from '@mui/material';
 
 function Profile() {
     const { isAuthenticated, user, jwtToken } = useContext(AuthContext);
@@ -53,7 +54,6 @@ function Profile() {
                 email,
             };
 
-            // 비밀번호가 입력된 경우에만 추가
             if (password) {
                 requestData.password = password;
             }
@@ -72,49 +72,51 @@ function Profile() {
     };
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <CircularProgress />;
     }
 
     return (
-        <div className="profile-container">
-            <h2>Your Profile</h2>
+        <Container maxWidth="sm" className="profile-container">
+            <Typography variant="h4" component="h2" gutterBottom>Your Profile</Typography>
             <form onSubmit={handleUpdateProfile} className="profile-form">
-                <div className="form-group">
-                    <label htmlFor="username">아이디 :</label>
-                    <input
-                        type="text"
-                        id="username"
-                        className="profile-input"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Username"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">이메일 :</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="profile-input"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">비밀번호 :</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="profile-input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password (leave blank if not changing)"
-                    />
-                </div>
-                <button type="submit" className="update-button">Update Profile</button>
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="아이디"
+                    variant="outlined"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="이메일"
+                    variant="outlined"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="비밀번호"
+                    variant="outlined"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password (leave blank if not changing)"
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    className="update-button"
+                    sx={{ mt: 2 }}
+                >
+                    Update Profile
+                </Button>
             </form>
-        </div>
+        </Container>
     );
 }
 

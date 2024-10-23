@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { TextField, Button, Box, CircularProgress, Typography, Paper } from '@mui/material';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -47,26 +48,50 @@ function Login() {
     };
 
     return (
-        <div className="container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit} className="form-container">
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Logging in...' : 'Login'}
-                </button>
-            </form>
-        </div>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+            }}
+        >
+            <Paper elevation={3} sx={{ padding: 4, maxWidth: 400 }}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                    Login
+                </Typography>
+                <form onSubmit={handleSubmit} className="form-container">
+                    <TextField
+                        label="Username"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Box sx={{ marginTop: 2 }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            disabled={loading}
+                        >
+                            {loading ? <CircularProgress size={24} /> : 'Login'}
+                        </Button>
+                    </Box>
+                </form>
+            </Paper>
+        </Box>
     );
 }
 
