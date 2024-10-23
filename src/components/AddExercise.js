@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import '../styles.css';
 function AddExercise() {
     const [exerciseName, setExerciseName] = useState('');
     const [exerciseType, setExerciseType] = useState('');

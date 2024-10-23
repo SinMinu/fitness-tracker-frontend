@@ -1,10 +1,12 @@
+// src/components/Home.js
 import React from 'react';
+import '../styles.css';
 
 function Home() {
     return (
-        <div>
-            <h1>Welcome to Fitness Tracker</h1>
-            <p>Manage your health and fitness goals here.</p>
+        <div className="home-container">
+            <h1 className="home-title">Welcome to Fitness Tracker</h1>
+            <p className="home-description">Track your exercises and achieve your fitness goals!</p>
         </div>
     );
 }

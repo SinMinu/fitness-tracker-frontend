@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import '../styles.css';
 
 function EditGoal() {
     const { goalId } = useParams(); // URL에서 goalId를 가져옴

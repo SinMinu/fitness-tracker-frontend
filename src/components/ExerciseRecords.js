@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles.css';
 
 function ExerciseRecords() {
     const [exerciseRecords, setExerciseRecords] = useState([]);
@@ -39,19 +40,23 @@ function ExerciseRecords() {
     }, []);
 
     return (
-        <div>
+        <div className="exercise-records">
             <h2>Exercise Records</h2>
-            {exerciseRecords.length === 0 ? (
-                <p>No exercise records found.</p>
-            ) : (
-                <ul>
-                    {exerciseRecords.map((record) => (
-                        <li key={record.id}>
-                            {record.exerciseName} - {record.exerciseType} - {record.duration} minutes
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <div className="exercise-cards-container">
+                {exerciseRecords.length === 0 ? (
+                    <p>No exercise records found.</p>
+                ) : (
+                    exerciseRecords.map((record) => (
+                        <div key={record.id} className="exercise-card">
+                            <h3>{record.exerciseName}</h3>
+                            <p>Type: {record.exerciseType}</p>
+                            <p>Duration: {record.duration} minutes</p>
+                            <p>Calories Burned: {record.caloriesBurned} kcal</p>
+                            <p>Date: {record.exerciseDate}</p>
+                        </div>
+                    ))
+                )}
+            </div>
         </div>
     );
 }
