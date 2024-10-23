@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles.css';
+import { Link } from 'react-router-dom';
 
 function ExerciseRecords() {
     const [exerciseRecords, setExerciseRecords] = useState([]);
@@ -53,6 +54,7 @@ function ExerciseRecords() {
                             <p>Duration: {record.duration} minutes</p>
                             <p>Calories Burned: {record.caloriesBurned} kcal</p>
                             <p>Date: {record.exerciseDate}</p>
+                            <Link to={`/exercise-detail/${record.id}`}>View Details</Link> {/* 상세 페이지로 이동하는 링크 추가 */}
                         </div>
                     ))
                 )}

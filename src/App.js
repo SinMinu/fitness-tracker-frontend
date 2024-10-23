@@ -11,6 +11,9 @@ import GoalRecords from './components/GoalRecords';
 import EditGoal from './components/EditGoal';
 import Navbar from './components/Navbar';
 import Profile from "./components/Profile";
+import Notification from './components/Notification';
+import GoalProgress from './components/GoalProgress';
+import ExerciseDetail from './components/ExerciseDetail';
 
 function App() {
     return (
@@ -23,9 +26,12 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/add-exercise" element={<AddExercise />} />
                     <Route path="/exercise-records" element={<ExerciseRecords />} />
+                    <Route path="/exercise-detail/:recordId" element={<ExerciseDetail />} />
                     <Route path="/add-goal" element={<AddGoal />} />
                     <Route path="/goal-records" element={<GoalRecords />} />
+                    <Route path="/goal-progress" element={<GoalProgress />} />
                     <Route path="/edit-goal/:goalId" element={<EditGoal />} />
+                    <Route path="/notifications" element={<Notification />} />
                     <Route path="profile" element={<Profile />} />
                 </Routes>
             </Router>
