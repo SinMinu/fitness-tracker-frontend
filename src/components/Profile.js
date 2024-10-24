@@ -35,6 +35,7 @@ function Profile() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [exerciseRecords, setExerciseRecords] = useState([]);
+    const [editing, setEditing] = useState(false); // 수정 모드 상태
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -80,7 +81,7 @@ function Profile() {
         e.preventDefault();
 
         try {
-            const requestData = { username, email };
+            const requestData = { email };
             if (password) {
                 requestData.password = password;
             }
@@ -92,6 +93,7 @@ function Profile() {
                 },
             });
             alert('프로필이 성공적으로 업데이트되었습니다.');
+            setEditing(false); // 수정 모드 해제
         } catch (error) {
             console.error('프로필 업데이트에 실패했습니다.', error);
             alert('프로필 업데이트에 실패했습니다. 다시 시도해주세요.');
@@ -106,9 +108,9 @@ function Profile() {
         if (view === 'month') {
             const isHoliday = holidays.includes(date.toISOString().slice(0, 10));
             if (date.getDay() === 0 || isHoliday) {
-                return 'sunday-tile'; // 일요일 및 공휴일 스타일
+                return 'sunday-tile';
             } else if (date.getDay() === 6) {
-                return 'saturday-tile'; // 토요일 스타일
+                return 'saturday-tile';
             }
         }
         return null;
@@ -141,7 +143,7 @@ function Profile() {
     return (
         <Container maxWidth="md" sx={{ mt: 8 }}>
             <Grid container spacing={3}>
-                {/* 프로필 정보 수정 섹션 */}
+                {/* 프로필 정보 섹션 */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} sx={{ padding: 4 }}>
                         <Typography variant="h4" component="h2" gutterBottom>프로필 정보</Typography>
@@ -152,7 +154,7 @@ function Profile() {
                                 label="아이디"
                                 variant="outlined"
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                disabled // 아이디는 수정 불가능하게 설정
                             />
                             <TextField
                                 fullWidth
@@ -161,6 +163,7 @@ function Profile() {
                                 variant="outlined"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                disabled={!editing} // 수정 모드일 때만 활성화
                             />
                             <TextField
                                 fullWidth
@@ -171,16 +174,29 @@ function Profile() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="비밀번호 (변경하지 않을 경우 빈 칸으로 두세요)"
+                                disabled={!editing} // 수정 모드일 때만 활성화
                             />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                sx={{ mt: 2 }}
-                            >
-                                프로필 업데이트
-                            </Button>
+                            {editing ? (
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth
+                                    sx={{ mt: 2 }}
+                                >
+                                    프로필 업데이트
+                                </Button>
+                            ) : (
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth
+                                    sx={{ mt: 2 }}
+                                    onClick={() => setEditing(true)} // 수정 모드로 전환
+                                >
+                                    수정
+                                </Button>
+                            )}
                         </form>
                     </Paper>
                 </Grid>
