@@ -11,7 +11,7 @@ function GoalRecords() {
     useEffect(() => {
         const fetchGoals = async () => {
             if (!jwtToken || !user) {
-                console.error('User is not authenticated.');
+                console.error('사용자가 인증되지 않았습니다.');
                 return;
             }
 
@@ -21,9 +21,9 @@ function GoalRecords() {
                         Authorization: `Bearer ${jwtToken}`,
                     },
                 });
-                setGoals(response.data);
+                setGoals(response.data); // 백엔드로부터 목표 데이터를 설정
             } catch (error) {
-                console.error('Failed to fetch goals:', error);
+                console.error('목표를 불러오는 데 실패했습니다:', error);
             } finally {
                 setIsLoading(false);
             }
@@ -33,22 +33,26 @@ function GoalRecords() {
     }, [jwtToken, user]);
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <p>로딩 중...</p>;
     }
 
     return (
         <div className="goal-records">
-            <h2>Your Goals</h2>
+            <h2>나의 목표</h2>
             {goals.length === 0 ? (
-                <p>No goals found.</p>
+                <p>목표가 없습니다.</p>
             ) : (
                 goals.map((goal) => (
-                    <div key={goal.id} className="goal-card">
+                    <div
+                        key={goal.id}
+                        className={`goal-card ${goal.currentValue >= goal.targetValue ? 'achieved' : ''}`} // 달성된 목표에 'achieved' 클래스 추가
+                    >
                         <h3>{goal.goalDescription}</h3>
-                        <p>Target Value: {goal.targetValue}</p>
-                        <p>Start Date: {goal.startDate}</p>
-                        <p>End Date: {goal.endDate}</p>
-                        <p>Status: {goal.isAchieved ? 'Achieved' : 'In Progress'}</p>
+                        <p>목표 값: {goal.targetValue}</p>
+                        <p>현재 값: {goal.currentValue}</p>
+                        <p>시작 날짜: {goal.startDate}</p>
+                        <p>종료 날짜: {goal.endDate}</p>
+                        <p>상태: {goal.currentValue >= goal.targetValue ? '달성됨' : '진행 중'}</p>
                     </div>
                 ))
             )}

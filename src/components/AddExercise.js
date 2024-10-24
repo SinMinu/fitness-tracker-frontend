@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles.css';
+import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
+
 function AddExercise() {
     const [exerciseName, setExerciseName] = useState('');
     const [exerciseType, setExerciseType] = useState('');
     const [duration, setDuration] = useState('');
     const [caloriesBurned, setCaloriesBurned] = useState('');
     const [exerciseDate, setExerciseDate] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // localStorage에서 JWT 토큰과 userId 가져오기
         const token = localStorage.getItem('jwtToken');
         const userId = localStorage.getItem('userId');
 
         if (!token || !userId) {
-            alert('You need to be logged in to add an exercise record.');
+            alert('운동 기록을 추가하려면 로그인해야 합니다.');
             return;
         }
+
+        setLoading(true);
 
         try {
             const response = await axios.post(
@@ -39,53 +43,91 @@ function AddExercise() {
             );
 
             console.log(response.data);
-            alert('Exercise record added successfully!');
+            alert('운동 기록이 성공적으로 추가되었습니다!');
         } catch (error) {
             console.error(error);
             if (error.response && error.response.status === 403) {
-                alert('You do not have permission to perform this action. Please check your credentials.');
+                alert('이 작업을 수행할 권한이 없습니다. 자격 증명을 확인하세요.');
             } else {
-                alert('Failed to add exercise record. Please try again.');
+                alert('운동 기록 추가에 실패했습니다. 다시 시도해주세요.');
             }
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div>
-            <h2>Add Exercise Record</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Exercise Name"
-                    value={exerciseName}
-                    onChange={(e) => setExerciseName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Exercise Type"
-                    value={exerciseType}
-                    onChange={(e) => setExerciseType(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Duration (minutes)"
-                    value={duration}
-                    onChange={(e) => setDuration(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Calories Burned"
-                    value={caloriesBurned}
-                    onChange={(e) => setCaloriesBurned(e.target.value)}
-                />
-                <input
-                    type="date"
-                    value={exerciseDate}
-                    onChange={(e) => setExerciseDate(e.target.value)}
-                />
-                <button type="submit">Add Exercise</button>
-            </form>
-        </div>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+            }}
+        >
+            <Paper elevation={3} sx={{ padding: 4, maxWidth: 600 }}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                    운동 기록 추가
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        label="운동 이름"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={exerciseName}
+                        onChange={(e) => setExerciseName(e.target.value)}
+                    />
+                    <TextField
+                        label="운동 종류"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={exerciseType}
+                        onChange={(e) => setExerciseType(e.target.value)}
+                    />
+                    <TextField
+                        label="운동 시간 (분)"
+                        type="number"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={duration}
+                        onChange={(e) => setDuration(e.target.value)}
+                    />
+                    <TextField
+                        label="소모 칼로리"
+                        type="number"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={caloriesBurned}
+                        onChange={(e) => setCaloriesBurned(e.target.value)}
+                    />
+                    <TextField
+                        label="운동 날짜"
+                        type="date"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{ shrink: true }}
+                        value={exerciseDate}
+                        onChange={(e) => setExerciseDate(e.target.value)}
+                    />
+                    <Box sx={{ marginTop: 2 }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            disabled={loading}
+                        >
+                            {loading ? <CircularProgress size={24} /> : '운동 추가'}
+                        </Button>
+                    </Box>
+                </form>
+            </Paper>
+        </Box>
     );
 }
 

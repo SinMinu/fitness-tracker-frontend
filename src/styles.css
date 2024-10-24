@@ -622,4 +622,177 @@ label {
 .goal-progress-card p {
     margin: 0;
 }
+.goal-progress-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
 
+.goal-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.goal-progress-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 20px;
+    margin: 10px 0;
+}
+
+.progress-bar-fill {
+    background: #76c7c0;
+    height: 100%;
+    transition: width 0.4s ease-in-out;
+}
+
+.goal-details-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.goal-details-button:hover {
+    background: #0056b3;
+}
+/* Add Exercise and Add Goal Form Styles */
+.add-form-container {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.add-form-container input,
+.add-form-container textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-container input:focus,
+.add-form-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
+}
+
+.add-form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.add-form-container button:hover {
+    background-color: #0056b3;
+}
+.goal-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease;
+}
+
+/* 달성된 목표 카드 스타일 (블루 테마) */
+.goal-card.achieved {
+    background-color: #e0f7fa; /* 연한 블루 배경 */
+    color: #0277bd; /* 진한 블루 텍스트 */
+    border: 2px solid #01579b; /* 진한 블루 테두리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
+    transform: scale(1.05); /* 살짝 확대 효과 */
+}
+
+/* 카드의 제목 스타일 */
+.goal-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* 달성된 목표 카드에서 제목 스타일 변경 */
+.goal-card.achieved h3 {
+    font-weight: bold;
+    text-decoration: underline; /* 강조하기 위해 밑줄 추가 */
+    color: #01579b; /* 진한 블루 */
+}
+
+/* 목표 카드에 마우스 올렸을 때 살짝 확대 */
+.goal-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 캘린더 날짜의 텍스트 색상을 블랙으로 변경 */
+.react-calendar__tile {
+    color: black; /* 날짜 색상 블랙 */
+}
+
+/* 선택된 날짜 강조 */
+.react-calendar__tile--active {
+    background-color: #1976d2 !important; /* 선택된 날짜 배경색 */
+    color: white !important; /* 선택된 날짜 글자 색상 */
+}
+
+/* 캘린더 전체 배경색 */
+.react-calendar {
+    background-color: white; /* 캘린더 배경을 흰색으로 유지 */
+}
+/* 캘린더 날짜 및 년/월 선택 영역의 텍스트 색상을 블랙으로 변경 */
+.custom-calendar .react-calendar__tile,
+.custom-calendar .react-calendar__navigation button {
+    color: black;
+}
+
+/* 선택된 날짜 강조 */
+.custom-calendar .react-calendar__tile--active {
+    background-color: #1976d2 !important; /* 선택된 날짜 배경색 */
+    color: white !important; /* 선택된 날짜 글자 색상 */
+}
+/* 캘린더가 박스 내에서 알맞게 크기 조정 */
+.custom-calendar {
+    width: 100%; /* 부모 요소의 너비에 맞게 조정 */
+    max-width: 400px; /* 최대 너비를 설정하여 박스를 넘지 않도록 제한 */
+    margin: 0 auto; /* 가운데 정렬 */
+    height: auto; /* 높이는 자동으로 조정 */
+}
+/* 프로필 및 캘린더 박스의 크기 조정 */
+.profile-container .MuiPaper-root {
+    height: 100%;
+}

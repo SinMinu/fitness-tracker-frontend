@@ -12,7 +12,7 @@ function ExerciseRecords() {
         const token = localStorage.getItem('jwtToken');
 
         if (!userId || !token) {
-            alert('You need to be logged in to view exercise records.');
+            alert('운동 기록을 보려면 로그인해야 합니다.');
             return;
         }
 
@@ -30,9 +30,9 @@ function ExerciseRecords() {
             } catch (error) {
                 console.error(error);
                 if (error.response && error.response.status === 403) {
-                    alert('You do not have permission to view these records. Please check your credentials.');
+                    alert('이 기록을 볼 권한이 없습니다. 자격 증명을 확인해주세요.');
                 } else {
-                    alert('Failed to fetch exercise records. Please try again.');
+                    alert('운동 기록을 불러오지 못했습니다. 다시 시도해주세요.');
                 }
             }
         };
@@ -42,19 +42,19 @@ function ExerciseRecords() {
 
     return (
         <div className="exercise-records">
-            <h2>Exercise Records</h2>
+            <h2>운동 기록</h2>
             <div className="exercise-cards-container">
                 {exerciseRecords.length === 0 ? (
-                    <p>No exercise records found.</p>
+                    <p>운동 기록이 없습니다.</p>
                 ) : (
                     exerciseRecords.map((record) => (
                         <div key={record.id} className="exercise-card">
                             <h3>{record.exerciseName}</h3>
-                            <p>Type: {record.exerciseType}</p>
-                            <p>Duration: {record.duration} minutes</p>
-                            <p>Calories Burned: {record.caloriesBurned} kcal</p>
-                            <p>Date: {record.exerciseDate}</p>
-                            <Link to={`/exercise-detail/${record.id}`}>View Details</Link> {/* 상세 페이지로 이동하는 링크 추가 */}
+                            <p>유형: {record.exerciseType}</p>
+                            <p>지속 시간: {record.duration} 분</p>
+                            <p>소모 칼로리: {record.caloriesBurned} kcal</p>
+                            <p>날짜: {record.exerciseDate}</p>
+                            <Link to={`/exercise-detail/${record.id}`}>자세히 보기</Link> {/* 상세 페이지로 이동하는 링크 */}
                         </div>
                     ))
                 )}

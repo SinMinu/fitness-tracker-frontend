@@ -14,6 +14,7 @@ import Profile from "./components/Profile";
 import Notification from './components/Notification';
 import GoalProgress from './components/GoalProgress';
 import ExerciseDetail from './components/ExerciseDetail';
+import CalendarPage from './components/CalendarPage'; // 캘린더 페이지 추가
 
 function App() {
     return (
@@ -32,7 +33,8 @@ function App() {
                     <Route path="/goal-progress" element={<GoalProgress />} />
                     <Route path="/edit-goal/:goalId" element={<EditGoal />} />
                     <Route path="/notifications" element={<Notification />} />
-                    <Route path="profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/calendar" element={<CalendarPage />} />
                 </Routes>
             </Router>
         </AuthProvider>

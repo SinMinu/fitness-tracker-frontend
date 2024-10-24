@@ -7,7 +7,7 @@ function GoalProgressChart({ goalProgress }) {
         labels: goalProgress.map((goal) => goal.goalDescription),
         datasets: [
             {
-                label: 'Progress (%)',
+                label: '진행률 (%)',
                 data: goalProgress.map((goal) => goal.progress),
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -33,13 +33,13 @@ function GoalProgressChart({ goalProgress }) {
                 max: 100,
                 title: {
                     display: true,
-                    text: 'Progress (%)',
+                    text: '진행률 (%)',
                 },
             },
             x: {
                 title: {
                     display: true,
-                    text: 'Goals',
+                    text: '목표',
                 },
             },
         },
@@ -47,7 +47,7 @@ function GoalProgressChart({ goalProgress }) {
 
     return (
         <div className="chart-container">
-            <h3>Goal Progress Chart</h3>
+            <h3>목표 진행 차트</h3>
             <Bar data={data} options={options} />
         </div>
     );
