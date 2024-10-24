@@ -796,3 +796,11 @@ label {
 .profile-container .MuiPaper-root {
     height: 100%;
 }
+.custom-calendar .react-calendar__tile {
+    position: relative;
+}
+
+.custom-calendar .react-calendar__tile div {
+    display: inline-block;
+    margin: 0 auto;
+}

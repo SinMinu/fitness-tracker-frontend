@@ -1,9 +1,11 @@
-// src/components/Home.js
-import React from 'react';
+import React, { useContext } from 'react';
 import '../styles.css';
 import { Box, Typography, Button } from '@mui/material';
+import { AuthContext } from '../context/AuthContext'; // AuthContext를 가져옴
 
 function Home() {
+    const { isAuthenticated } = useContext(AuthContext); // 로그인 여부 확인
+
     return (
         <Box
             sx={{
@@ -22,15 +24,19 @@ function Home() {
             <Typography variant="h6" component="p" gutterBottom sx={{ color: '#555' }}>
                 운동을 기록하고 목표를 달성하세요!
             </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                sx={{ mt: 3 }}
-                href="/register"
-            >
-                시작하기
-            </Button>
+
+            {/* 로그인되지 않은 경우에만 버튼을 표시 */}
+            {!isAuthenticated && (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    sx={{ mt: 3 }}
+                    href="/register"
+                >
+                    시작하기
+                </Button>
+            )}
         </Box>
     );
 }
