@@ -676,28 +676,33 @@ label {
 /* Add Exercise and Add Goal Form Styles */
 .add-form-container {
     width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.add-form-container:hover {
+    transform: translateY(-5px);
 }
 
 .add-form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
+    font-weight: 600;
 }
 
 .add-form-container input,
 .add-form-container textarea {
     width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .add-form-container input:focus,
@@ -722,6 +727,7 @@ label {
 .add-form-container button:hover {
     background-color: #0056b3;
 }
+
 .goal-card {
     border: 1px solid #ccc;
     padding: 10px;
@@ -803,4 +809,19 @@ label {
 .custom-calendar .react-calendar__tile div {
     display: inline-block;
     margin: 0 auto;
+}
+.goal-cards-container {
+    overflow-y: auto;
+    max-height: 500px;
+    padding-right: 10px; /* 여유 공간 추가 */
+}
+
+/* 스크롤바 숨기기 */
+.goal-cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+.goal-cards-container {
+    -ms-overflow-style: none;  /* IE 및 Edge에서 스크롤바 숨기기 */
+    scrollbar-width: none;     /* Firefox에서 스크롤바 숨기기 */
 }

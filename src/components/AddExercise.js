@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles.css';
-import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Paper, TextField, Typography, MenuItem } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function AddExercise() {
     const [exerciseName, setExerciseName] = useState('');
@@ -11,9 +12,16 @@ function AddExercise() {
     const [exerciseDate, setExerciseDate] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const navigate = useNavigate();
+
+    // 운동 종류 목록
+    const exerciseTypes = [
+        '웨이트 트레이닝', '유산소 운동', '요가', '스트레칭', '러닝', '수영', '사이클링', '필라테스',
+        '킥복싱', '크로스핏', '하이킹', '댄스', '배드민턴', '테니스', '농구', '축구', '스쿼시', '스키', '클라이밍', '걷기',
+    ];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const token = localStorage.getItem('jwtToken');
         const userId = localStorage.getItem('userId');
 
@@ -25,32 +33,16 @@ function AddExercise() {
         setLoading(true);
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 `http://localhost:8080/api/exercise-records/user/${userId}`,
-                {
-                    exerciseName,
-                    exerciseType,
-                    duration,
-                    caloriesBurned,
-                    exerciseDate,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                }
+                { exerciseName, exerciseType, duration, caloriesBurned, exerciseDate },
+                { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
             );
-
-            console.log(response.data);
             alert('운동 기록이 성공적으로 추가되었습니다!');
+            navigate('/exercise-records');
         } catch (error) {
             console.error(error);
-            if (error.response && error.response.status === 403) {
-                alert('이 작업을 수행할 권한이 없습니다. 자격 증명을 확인하세요.');
-            } else {
-                alert('운동 기록 추가에 실패했습니다. 다시 시도해주세요.');
-            }
+            alert('운동 기록 추가에 실패했습니다. 다시 시도해주세요.');
         } finally {
             setLoading(false);
         }
@@ -62,10 +54,10 @@ function AddExercise() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
+                height: '90vh', // 화면에서 약간 줄임
             }}
         >
-            <Paper elevation={3} sx={{ padding: 4, maxWidth: 600 }}>
+            <Paper elevation={3} sx={{ padding: 3, maxWidth: 550 }}> {/* padding을 3으로 줄임 */}
                 <Typography variant="h4" component="h1" gutterBottom>
                     운동 기록 추가
                 </Typography>
@@ -83,9 +75,19 @@ function AddExercise() {
                         variant="outlined"
                         fullWidth
                         margin="normal"
+                        select
                         value={exerciseType}
                         onChange={(e) => setExerciseType(e.target.value)}
-                    />
+                        SelectProps={{
+                            MenuProps: {
+                                PaperProps: { style: { maxHeight: 200, overflowY: 'auto' } },
+                            },
+                        }}
+                    >
+                        {exerciseTypes.map((type) => (
+                            <MenuItem key={type} value={type}>{type}</MenuItem>
+                        ))}
+                    </TextField>
                     <TextField
                         label="운동 시간 (분)"
                         type="number"

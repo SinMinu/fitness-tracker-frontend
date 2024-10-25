@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import GoalProgressChart from './GoalProgressChart';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Grid, Typography, Box } from '@mui/material';
 import '../styles.css';
 
 function GoalProgress() {
@@ -29,11 +29,9 @@ function GoalProgress() {
         };
 
         fetchGoalProgress();
-    }, [user, jwtToken]); // 의존성 배열에 user와 jwtToken만 포함
-
+    }, [user, jwtToken]);
 
     const handleProgressUpdate = async () => {
-        console.log("업데이트할 진행률 값:", progressValue); // 값 확인
         try {
             await axios.put(
                 `http://localhost:8080/api/goals/goal/${selectedGoal.goalId}/progress`,
@@ -62,45 +60,68 @@ function GoalProgress() {
         }
     };
 
-
-
     const handleOpenDialog = (goal) => {
         setSelectedGoal(goal);
-        setProgressValue(goal.progress); // 현재 진행률 값으로 초기화
+        setProgressValue(goal.progress);
         setOpenDialog(true);
     };
 
     return (
-        <div className="goal-progress-container">
-            <h2>목표 진행 상황</h2>
-            {goalProgress.length === 0 ? (
-                <p>등록된 목표가 없습니다.</p>
-            ) : (
-                <>
-                    <GoalProgressChart goalProgress={goalProgress} />
-                    <div className="goal-cards-container">
-                        {goalProgress.map((goal) => (
-                            <div key={goal.goalId} className="goal-progress-card">
-                                <h3>{goal.goalDescription}</h3>
-                                <div className="progress-bar">
-                                    <div
-                                        className="progress-bar-fill"
-                                        style={{ width: `${goal.progress}%` }}
-                                    ></div>
-                                </div>
-                                <p>{goal.progress}% 완료</p>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => handleOpenDialog(goal)}
-                                >
-                                    업데이트
-                                </Button>
-                            </div>
-                        ))}
-                    </div>
-                </>
-            )}
+        <Box sx={{ flexGrow: 1, p: 3, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
+            <Grid container spacing={3} alignItems="stretch">
+                {/* 목표 목록 - 비율 1 */}
+                <Grid item xs={12} md={4}>
+                    <Typography variant="h5" gutterBottom>목표 목록</Typography>
+                    <Box className="goal-cards-container" sx={{ overflowY: 'auto', maxHeight: '500px', pr: 2 }}>
+                        {goalProgress.length === 0 ? (
+                            <Typography>등록된 목표가 없습니다.</Typography>
+                        ) : (
+                            goalProgress.map((goal) => (
+                                <Box key={goal.goalId} className="goal-progress-card" sx={{ mb: 3 }}>
+                                    <Typography variant="h6">{goal.goalDescription}</Typography>
+                                    <Box
+                                        className="progress-bar"
+                                        sx={{
+                                            position: 'relative',
+                                            height: '10px',
+                                            backgroundColor: '#e0e0e0',
+                                            borderRadius: '5px',
+                                            mt: 1,
+                                        }}
+                                    >
+                                        <Box
+                                            className="progress-bar-fill"
+                                            sx={{
+                                                width: `${goal.progress}%`,
+                                                backgroundColor: goal.progress === 100 ? '#4caf50' : '#1976d2',
+                                                height: '100%',
+                                                borderRadius: '5px',
+                                            }}
+                                        />
+                                    </Box>
+                                    <Typography sx={{ mt: 1 }}>{goal.progress}% 완료</Typography>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        onClick={() => handleOpenDialog(goal)}
+                                        sx={{ mt: 1 }}
+                                    >
+                                        업데이트
+                                    </Button>
+                                </Box>
+                            ))
+                        )}
+                    </Box>
+                </Grid>
+
+                {/* 목표 차트 - 비율 2 */}
+                <Grid item xs={12} md={8}>
+                    <Typography variant="h5" gutterBottom>목표 진행 차트</Typography>
+                    <Box sx={{ height: '100%' }}>
+                        <GoalProgressChart goalProgress={goalProgress} />
+                    </Box>
+                </Grid>
+            </Grid>
 
             {/* 팝업 다이얼로그 */}
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="xs" fullWidth>
@@ -125,7 +146,7 @@ function GoalProgress() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </Box>
     );
 }
 

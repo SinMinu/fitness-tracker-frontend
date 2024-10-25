@@ -4,28 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles.css';
 import { AuthContext } from '../context/AuthContext';
 import { TextField, Button, Container, Typography, CircularProgress, Paper, Grid } from '@mui/material';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import '../CustomCalendar.css';
-
-// 대한민국 법정 공휴일 (2024년 기준)
-const holidays = [
-    '2024-01-01', // 신정
-    '2024-02-09', // 설날 연휴 시작
-    '2024-02-10', // 설날
-    '2024-02-11', // 설날 연휴 끝
-    '2024-03-01', // 삼일절
-    '2024-05-05', // 어린이날
-    '2024-05-15', // 부처님 오신 날
-    '2024-06-06', // 현충일
-    '2024-08-15', // 광복절
-    '2024-09-16', // 추석 연휴 시작
-    '2024-09-17', // 추석
-    '2024-09-18', // 추석 연휴 끝
-    '2024-10-03', // 개천절
-    '2024-10-09', // 한글날
-    '2024-12-25', // 성탄절
-];
 
 function Profile() {
     const { isAuthenticated, user, jwtToken } = useContext(AuthContext);
@@ -33,8 +11,6 @@ function Profile() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [exerciseRecords, setExerciseRecords] = useState([]);
     const [editing, setEditing] = useState(false); // 수정 모드 상태
     const navigate = useNavigate();
 
@@ -60,28 +36,15 @@ function Profile() {
             }
         };
 
-        const fetchExerciseRecords = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/api/exercise-records/user/${user.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${jwtToken}`,
-                    },
-                });
-                setExerciseRecords(response.data);
-            } catch (error) {
-                console.error('운동 기록을 불러오지 못했습니다:', error);
-            }
-        };
-
         fetchUserProfile();
-        fetchExerciseRecords();
     }, [isAuthenticated, navigate, user, jwtToken]);
 
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
 
         try {
-            const requestData = { email };
+            // 서버에 전송할 데이터에 항상 `username`을 포함시킴
+            const requestData = { username, email };
             if (password) {
                 requestData.password = password;
             }
@@ -100,38 +63,6 @@ function Profile() {
         }
     };
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-
-    const tileClassName = ({ date, view }) => {
-        if (view === 'month') {
-            const isHoliday = holidays.includes(date.toISOString().slice(0, 10));
-            if (date.getDay() === 0 || isHoliday) {
-                return 'sunday-tile';
-            } else if (date.getDay() === 6) {
-                return 'saturday-tile';
-            }
-        }
-        return null;
-    };
-
-    const tileContent = ({ date, view }) => {
-        if (view === 'month') {
-            const exerciseDate = exerciseRecords.find((record) => {
-                const recordDate = new Date(record.exerciseDate);
-                return (
-                    recordDate.getFullYear() === date.getFullYear() &&
-                    recordDate.getMonth() === date.getMonth() &&
-                    recordDate.getDate() === date.getDate()
-                );
-            });
-            return exerciseDate ? (
-                <div style={{ backgroundColor: '#1976d2', borderRadius: '50%', width: '10px', height: '10px', margin: '0 auto' }}></div>
-            ) : null;
-        }
-    };
-
     if (isLoading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
@@ -144,10 +75,10 @@ function Profile() {
         <Container maxWidth="md" sx={{ mt: 8 }}>
             <Grid container spacing={3}>
                 {/* 프로필 정보 섹션 */}
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <Paper elevation={3} sx={{ padding: 4 }}>
                         <Typography variant="h4" component="h2" gutterBottom>프로필 정보</Typography>
-                        <form onSubmit={handleUpdateProfile} className="profile-form">
+                        <form className="profile-form">
                             <TextField
                                 fullWidth
                                 margin="normal"
@@ -177,15 +108,27 @@ function Profile() {
                                 disabled={!editing} // 수정 모드일 때만 활성화
                             />
                             {editing ? (
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    fullWidth
-                                    sx={{ mt: 2 }}
-                                >
-                                    프로필 업데이트
-                                </Button>
+                                <>
+                                    <Button
+                                        type="button" // 수정하기 버튼에서 `submit` 대신 `button` 사용
+                                        variant="contained"
+                                        color="primary"
+                                        fullWidth
+                                        sx={{ mt: 2 }}
+                                        onClick={handleUpdateProfile} // 수정 버튼에서만 업데이트
+                                    >
+                                        수정하기
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="secondary"
+                                        fullWidth
+                                        sx={{ mt: 2 }}
+                                        onClick={() => setEditing(false)} // 수정 취소
+                                    >
+                                        취소
+                                    </Button>
+                                </>
                             ) : (
                                 <Button
                                     variant="outlined"
@@ -198,24 +141,6 @@ function Profile() {
                                 </Button>
                             )}
                         </form>
-                    </Paper>
-                </Grid>
-
-                {/* 캘린더 섹션 */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} sx={{ padding: 4 }}>
-                        <Typography variant="h4" component="h1" gutterBottom>나의 캘린더</Typography>
-                        <Calendar
-                            onChange={handleDateChange}
-                            value={selectedDate}
-                            tileContent={tileContent}
-                            tileClassName={tileClassName}
-                            locale="ko-KR"
-                            className="custom-calendar"
-                        />
-                        <Typography variant="body1" sx={{ mt: 2 }}>
-                            선택된 날짜: {selectedDate.toLocaleDateString()}
-                        </Typography>
                     </Paper>
                 </Grid>
             </Grid>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles.css';
+import {Box, CircularProgress, Typography} from "@mui/material";
 
 function EditGoal() {
     const { goalId } = useParams(); // URL에서 goalId를 가져옴
@@ -90,7 +91,12 @@ function EditGoal() {
     };
 
     if (loading) {
-        return <div>Loading...</div>; // 로딩 중일 때 표시할 내용
+        return (
+            <Box display="flex" alignItems="center" justifyContent="center" height="80vh">
+                <CircularProgress />
+                <Typography variant="h6" sx={{ ml: 2 }}>로딩 중입니다...</Typography>
+            </Box>
+        );
     }
 
     return (

@@ -15,6 +15,8 @@ import Notification from './components/Notification';
 import GoalProgress from './components/GoalProgress';
 import ExerciseDetail from './components/ExerciseDetail';
 import CalendarPage from './components/CalendarPage'; // 캘린더 페이지 추가
+import ExerciseChart from './components/CombinedView';
+import ExerciseRecommendations from './components/ExerciseRecommendations';
 
 function App() {
     return (
@@ -26,7 +28,9 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/add-exercise" element={<AddExercise />} />
+                    <Route path="/exercise-chart" element={<ExerciseChart />} />
                     <Route path="/exercise-records" element={<ExerciseRecords />} />
+                    <Route path="/recommendations" element={<ExerciseRecommendations />} />
                     <Route path="/exercise-detail/:recordId" element={<ExerciseDetail />} />
                     <Route path="/add-goal" element={<AddGoal />} />
                     <Route path="/goal-records" element={<GoalRecords />} />

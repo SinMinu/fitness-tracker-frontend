@@ -14,7 +14,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
 
 function Navbar() {
     const { isAuthenticated, logout, user, jwtToken } = useContext(AuthContext);
@@ -96,6 +95,8 @@ function Navbar() {
                                 <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#e0f7fa' }}>
                                     <Button color="inherit" component={Link} to="/add-exercise">운동 추가</Button>
                                     <Button color="inherit" component={Link} to="/exercise-records">운동 기록</Button>
+                                    <Button color="inherit" component={Link} to="/exercise-chart">운동 기록 차트</Button> {/* 차트 추가 */}
+                                    <Button color="inherit" component={Link} to="/recommendations">추천 운동</Button>
                                 </Paper>
 
                                 {/* 그룹 3: 목표 관련 */}

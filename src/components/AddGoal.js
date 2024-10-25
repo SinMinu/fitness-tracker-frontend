@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles.css';
 import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function AddGoal() {
     const [goalName, setGoalName] = useState('');
     const [goalDescription, setGoalDescription] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [targetValue, setTargetValue] = useState(100); // 목표 값은 고정된 100으로 설정
+    const [targetValue, setTargetValue] = useState(100);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('jwtToken');
 
@@ -27,30 +28,14 @@ function AddGoal() {
         try {
             const response = await axios.post(
                 `http://localhost:8080/api/goals/user/${userId}`,
-                {
-                    goalName,
-                    goalDescription,
-                    startDate,
-                    endDate,
-                    targetValue, // 목표 값은 항상 100
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                }
+                { goalName, goalDescription, startDate, endDate, targetValue },
+                { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
             );
-
-            console.log(response.data);
             alert('목표가 성공적으로 추가되었습니다!');
+            navigate('/goal-records');
         } catch (error) {
             console.error(error);
-            if (error.response && error.response.status === 403) {
-                alert('목표를 설정할 권한이 없습니다. 자격 증명을 확인하세요.');
-            } else {
-                alert('목표 추가에 실패했습니다. 다시 시도해 주세요.');
-            }
+            alert('목표 추가에 실패했습니다. 다시 시도해 주세요.');
         } finally {
             setLoading(false);
         }
@@ -62,10 +47,10 @@ function AddGoal() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
+                height: '90vh', // 화면에서 약간 줄임
             }}
         >
-            <Paper elevation={3} sx={{ padding: 4, maxWidth: 600 }}>
+            <Paper elevation={3} sx={{ padding: 3, maxWidth: 550 }}> {/* padding을 3으로 줄임 */}
                 <Typography variant="h4" component="h1" gutterBottom>
                     새로운 목표 추가
                 </Typography>
@@ -108,7 +93,6 @@ function AddGoal() {
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                     />
-                    {/* 목표 값은 수정 불가하고 100으로 고정 */}
                     <TextField
                         label="목표 값"
                         type="number"
@@ -116,7 +100,7 @@ function AddGoal() {
                         fullWidth
                         margin="normal"
                         value={targetValue}
-                        disabled // 수정 불가능하게 설정
+                        disabled
                     />
                     <Box sx={{ marginTop: 2 }}>
                         <Button
