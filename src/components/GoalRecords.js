@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { Box, CircularProgress, Typography, Card, CardContent, Button, Grid } from '@mui/material';
+import { Box, CircularProgress, Typography, Card, CardContent, Button, Grid, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function GoalRecords() {
@@ -33,11 +33,10 @@ function GoalRecords() {
         fetchGoals();
     }, [jwtToken, user]);
 
-    // 오늘 날짜와 목표 종료 날짜 비교 함수
     const isPastDueDate = (endDate) => {
         const today = new Date();
         const end = new Date(endDate);
-        return end < today; // 종료 날짜가 오늘보다 이전인지 확인
+        return end < today;
     };
 
     if (isLoading) {
@@ -57,24 +56,27 @@ function GoalRecords() {
             ) : (
                 <Grid container spacing={3} justifyContent="center">
                     {goals.map((goal) => {
-                        const isExpired = isPastDueDate(goal.endDate); // 목표가 종료되었는지 확인
+                        const isExpired = isPastDueDate(goal.endDate);
 
                         return (
-                            <Grid item xs={12} sm={6} md={2.4} key={goal.id}> {/* 5개씩 배열되도록 설정 */}
+                            <Grid item xs={12} sm={6} md={2.4} key={goal.id}>
                                 <Card
                                     sx={{
                                         height: '100%',
                                         borderRadius: 2,
                                         boxShadow: 3,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between',
                                         backgroundColor: goal.currentValue >= goal.targetValue
                                             ? '#e0f7fa'
                                             : isExpired
-                                                ? '#ffebee'  // 종료 날짜가 지난 목표는 빨간색 계열 배경
+                                                ? '#ffebee'
                                                 : '#fff',
                                         borderLeft: goal.currentValue >= goal.targetValue
                                             ? '5px solid #00796b'
                                             : isExpired
-                                                ? '5px solid #d32f2f'  // 경고 스타일
+                                                ? '5px solid #d32f2f'
                                                 : 'none',
                                     }}
                                 >
@@ -106,14 +108,25 @@ function GoalRecords() {
                                                 : '진행 중...'}
                                         </Typography>
                                     </CardContent>
-                                    <Button
-                                        component={Link}
-                                        to={`/goal-progress/`}
-                                        size="small"
-                                        color="primary"
-                                    >
-                                        상세보기
-                                    </Button>
+                                    <CardActions sx={{ justifyContent: 'center', mb: 1 }}>
+                                        <Button
+                                            component={Link}
+                                            to={`/goal-progress/`}
+                                            size="small"
+                                            variant="contained"
+                                            sx={{
+                                                backgroundColor: '#007bff',
+                                                color: 'white',
+                                                '&:hover': { backgroundColor: '#0056b3' },
+                                                fontWeight: 'bold',
+                                                px: 2,
+                                                py: 1,
+                                                borderRadius: '8px',
+                                            }}
+                                        >
+                                            상세보기
+                                        </Button>
+                                    </CardActions>
                                 </Card>
                             </Grid>
                         );

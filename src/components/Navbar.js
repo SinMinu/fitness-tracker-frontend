@@ -103,7 +103,7 @@ function Navbar() {
                                 <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#ffe0b2' }}>
                                     <Button color="inherit" component={Link} to="/add-goal">목표 추가</Button>
                                     <Button color="inherit" component={Link} to="/goal-records">목표 기록</Button>
-                                    <Button color="inherit" component={Link} to="/goal-progress">목표 진행 상황</Button>
+                                    {/*<Button color="inherit" component={Link} to="/goal-progress">목표 진행 상황</Button>*/}
                                 </Paper>
 
                                 {/* 그룹 4: 프로필 및 알림 */}

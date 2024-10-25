@@ -2,29 +2,25 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import {TextField, Button, CircularProgress, Box, Typography} from '@mui/material';
+import { TextField, Button, CircularProgress, Box, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import ShareExerciseRecord from './ShareExerciseRecord';
 
-// 차트에 필요한 설정 등록
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function ExerciseDetail() {
     const { recordId } = useParams();
     const { jwtToken } = useContext(AuthContext);
     const [exerciseRecord, setExerciseRecord] = useState(null);
-    const [editing, setEditing] = useState(false); // 수정 모드 여부
-    const [loading, setLoading] = useState(false); // 로딩 상태
+    const [editing, setEditing] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
-    const [feedback, setFeedback] = useState(''); // 피드백 상태
+    const [feedback, setFeedback] = useState('');
 
     useEffect(() => {
         const fetchExerciseRecord = async () => {
-            if (!jwtToken) {
-                console.error('토큰이 없습니다.');
-                return;
-            }
+            if (!jwtToken) return;
 
             try {
                 const response = await axios.get(`http://localhost:8080/api/exercise-records/${recordId}`, {
@@ -33,7 +29,7 @@ function ExerciseDetail() {
                     },
                 });
                 setExerciseRecord(response.data);
-                generateFeedback(response.data); // 피드백 생성
+                generateFeedback(response.data);
             } catch (error) {
                 console.error('운동 기록을 불러오지 못했습니다:', error);
             }
@@ -44,7 +40,6 @@ function ExerciseDetail() {
         }
     }, [recordId, jwtToken]);
 
-    // 피드백 생성 함수
     const generateFeedback = (record) => {
         let message = '';
         const { intensity, duration, caloriesBurned } = record;
@@ -68,24 +63,20 @@ function ExerciseDetail() {
         setFeedback(message);
     };
 
-    // 수정 후 저장 기능
     const handleSave = async () => {
         setLoading(true);
         const userId = localStorage.getItem('userId');
 
         try {
-            console.log("보내는 데이터:", exerciseRecord); // 보낼 데이터 확인
             const response = await axios.put(
                 `http://localhost:8080/api/exercise-records/user/${userId}/record/${exerciseRecord.id}`,
                 exerciseRecord,
                 { headers: { Authorization: `Bearer ${jwtToken}` } }
             );
-
-            console.log('응답 데이터:', response.data); // 응답 데이터 확인
             alert('운동 기록이 성공적으로 수정되었습니다.');
             setExerciseRecord(response.data);
-            generateFeedback(response.data); // 수정 후 피드백 업데이트
-            setEditing(false); // 저장 후 수정 모드 해제
+            generateFeedback(response.data);
+            setEditing(false);
         } catch (error) {
             console.error('운동 기록 수정에 실패했습니다:', error);
         } finally {
@@ -93,7 +84,6 @@ function ExerciseDetail() {
         }
     };
 
-    // 삭제 기능
     const handleDelete = async () => {
         if (window.confirm('이 운동 기록을 삭제하시겠습니까?')) {
             setLoading(true);
@@ -102,7 +92,7 @@ function ExerciseDetail() {
                     headers: { Authorization: `Bearer ${jwtToken}` },
                 });
                 alert('운동 기록이 삭제되었습니다.');
-                navigate('/exercise-records'); // 삭제 후 목록으로 이동
+                navigate('/exercise-records');
             } catch (error) {
                 console.error('운동 기록 삭제에 실패했습니다:', error);
             } finally {
@@ -111,10 +101,8 @@ function ExerciseDetail() {
         }
     };
 
-    // `null` 값 체크 후 빈 문자열로 처리
     const safeValue = (value) => (value === null || value === undefined ? '' : value);
 
-    // 운동 시간 차트 데이터 설정
     const durationChartData = {
         labels: ['운동 시간 (분)'],
         datasets: [
@@ -128,7 +116,6 @@ function ExerciseDetail() {
         ],
     };
 
-    // 소모 칼로리 차트 데이터 설정
     const caloriesChartData = {
         labels: ['소모 칼로리 (kcal)'],
         datasets: [
@@ -153,10 +140,54 @@ function ExerciseDetail() {
 
     return (
         <div className="exercise-detail-container">
-            <h2>운동 상세 정보</h2>
-            {editing ? (
-                <form>
-                    {/* 수정 필드들 */}
+            <h2 style={{ marginBottom: '20px' }}>운동 상세 정보</h2>
+            <div>
+                <p><strong>이름:</strong> {exerciseRecord.exerciseName}</p>
+                <p><strong>유형:</strong> {exerciseRecord.exerciseType}</p>
+                <p><strong>지속 시간:</strong> {exerciseRecord.duration} 분</p>
+                <p><strong>소모 칼로리:</strong> {exerciseRecord.caloriesBurned} kcal</p>
+                <p><strong>운동 장소:</strong> {exerciseRecord.location}</p>
+                <p><strong>사용한 장비:</strong> {exerciseRecord.equipment}</p>
+                <p><strong>운동 강도:</strong> {exerciseRecord.intensity}</p>
+                <p><strong>메모:</strong> {exerciseRecord.notes}</p>
+                <p style={{ fontWeight: 'bold', color: 'green' }}>운동 피드백: {feedback}</p>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setEditing(true)}
+                        sx={{ width: '150px' }}
+                    >
+                        수정
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleDelete}
+                        sx={{ ml: 2, width: '150px' }}
+                    >
+                        삭제
+                    </Button>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                    <ShareExerciseRecord record={exerciseRecord} />
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+                    <Box sx={{ flex: 1, mr: 2 }}>
+                        <h3>운동 시간 (분)</h3>
+                        <Bar data={durationChartData} />
+                    </Box>
+                    <Box sx={{ flex: 1, ml: 2 }}>
+                        <h3>소모 칼로리 (kcal)</h3>
+                        <Bar data={caloriesChartData} />
+                    </Box>
+                </Box>
+            </div>
+
+            {/* 수정 모달 */}
+            <Dialog open={editing} onClose={() => setEditing(false)} maxWidth="sm" fullWidth disableEnforceFocus>
+            <DialogTitle>운동 기록 수정</DialogTitle>
+                <DialogContent>
                     <TextField
                         label="이름"
                         value={safeValue(exerciseRecord.exerciseName)}
@@ -217,73 +248,16 @@ function ExerciseDetail() {
                         multiline
                         rows={4}
                     />
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ mx: 2, width: '150px' }}
-                            onClick={handleSave}
-                            disabled={loading}
-                        >
-                            {loading ? <CircularProgress size={24} /> : '저장'}
-                        </Button>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            sx={{ mx: 2, width: '150px' }}
-                            onClick={() => setEditing(false)}
-                        >
-                            취소
-                        </Button>
-                    </Box>
-                </form>
-            ) : (
-                <div>
-                    <p><strong>이름:</strong> {exerciseRecord.exerciseName}</p>
-                    <p><strong>유형:</strong> {exerciseRecord.exerciseType}</p>
-                    <p><strong>지속 시간:</strong> {exerciseRecord.duration} 분</p>
-                    <p><strong>소모 칼로리:</strong> {exerciseRecord.caloriesBurned} kcal</p>
-                    <p><strong>운동 장소:</strong> {exerciseRecord.location}</p>
-                    <p><strong>사용한 장비:</strong> {exerciseRecord.equipment}</p>
-                    <p><strong>운동 강도:</strong> {exerciseRecord.intensity}</p>
-                    <p><strong>메모:</strong> {exerciseRecord.notes}</p>
-                    {/* 운동 피드백 */}
-                    <p style={{ fontWeight: 'bold', color: 'green' }}>운동 피드백: {feedback}</p>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ mx: 2, width: '150px' }}
-                            onClick={() => setEditing(true)}
-                        >
-                            수정
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            sx={{ mx: 2, width: '150px' }}
-                            onClick={handleDelete}
-                        >
-                            삭제
-                        </Button>
-                    </Box>
-
-                    {/* 운동 시간과 소모 칼로리 차트를 가로로 나란히 배열 */}
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-                        {/* 운동 시간 차트 */}
-                        <Box sx={{ flex: 1, mr: 2 }}>
-                            <h3>운동 시간 (분)</h3>
-                            <Bar data={durationChartData} />
-                        </Box>
-
-                        {/* 소모 칼로리 차트 */}
-                        <Box sx={{ flex: 1, ml: 2 }}>
-                            <h3>소모 칼로리 (kcal)</h3>
-                            <Bar data={caloriesChartData} />
-                        </Box>
-                    </Box>
-                </div>
-            )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleSave} color="primary" variant="contained">
+                        저장
+                    </Button>
+                    <Button onClick={() => setEditing(false)} color="secondary" variant="outlined">
+                        취소
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
