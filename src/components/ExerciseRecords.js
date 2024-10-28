@@ -39,7 +39,10 @@ function ExerciseRecords() {
                         'Content-Type': 'application/json',
                     },
                 });
-                setExerciseRecords(response.data);
+
+                // 날짜 기준으로 최신 순으로 정렬
+                const sortedRecords = response.data.sort((a, b) => new Date(b.exerciseDate) - new Date(a.exerciseDate));
+                setExerciseRecords(sortedRecords);
             } catch (error) {
                 console.error(error);
                 alert('운동 기록을 불러오지 못했습니다. 다시 시도해주세요.');
@@ -48,6 +51,7 @@ function ExerciseRecords() {
 
         fetchExerciseRecords();
     }, []);
+
 
     useEffect(() => {
         const filterRecordsByMonth = () => {

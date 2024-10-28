@@ -5,7 +5,8 @@ import { AuthContext } from '../context/AuthContext';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../CustomCalendar.css';
-import {Container, Paper, Grid, Typography, Box, CircularProgress} from '@mui/material';
+import { Container, Paper, Grid, Typography, Box, CircularProgress } from '@mui/material';
+import CaloriesTrendChart from '../components/CaloriesTrendChart';
 
 function CombinedView() {
     const { jwtToken, user } = useContext(AuthContext);
@@ -13,7 +14,6 @@ function CombinedView() {
     const [exerciseRecords, setExerciseRecords] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    // 대한민국 법정 공휴일 (2024년 기준)
     const holidays = [
         '2024-01-01', '2024-02-09', '2024-02-10', '2024-02-11', '2024-03-01', '2024-05-05', '2024-05-15',
         '2024-06-06', '2024-08-15', '2024-09-16', '2024-09-17', '2024-09-18', '2024-10-03', '2024-10-09', '2024-12-25'
@@ -31,7 +31,6 @@ function CombinedView() {
                 const exerciseRecords = response.data;
                 setExerciseRecords(exerciseRecords);
 
-                // 초기 선택된 날짜에 맞는 데이터로 차트 설정
                 updateChartData(new Date(), exerciseRecords);
             } catch (error) {
                 console.error('운동 기록을 불러오지 못했습니다:', error);
@@ -51,7 +50,7 @@ function CombinedView() {
             );
         });
 
-        const labels = filteredRecords.map(record => record.exerciseName); // 운동 이름으로 라벨 설정
+        const labels = filteredRecords.map(record => record.exerciseName);
         const calories = filteredRecords.map(record => record.caloriesBurned);
 
         setChartData({
@@ -70,7 +69,7 @@ function CombinedView() {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        updateChartData(date, exerciseRecords); // 선택된 날짜에 맞는 차트 데이터 업데이트
+        updateChartData(date, exerciseRecords);
     };
 
     const tileClassName = ({ date, view }) => {
@@ -136,6 +135,18 @@ function CombinedView() {
                     <Paper elevation={3} sx={{ padding: 4 }}>
                         <Typography variant="h4" component="h1" gutterBottom>운동 기록 차트</Typography>
                         <Bar data={chartData} />
+                    </Paper>
+                </Grid>
+
+                {/* 운동 통계 섹션 */}
+                <Grid item xs={12}>
+                    <Paper elevation={3} sx={{ padding: 4, mt: 4 }}>
+                        <Typography variant="h4" component="h1" gutterBottom>운동 통계</Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <CaloriesTrendChart period="일주일" />
+                            <CaloriesTrendChart period="한달" />
+                            <CaloriesTrendChart period="분기" />
+                        </Box>
                     </Paper>
                 </Grid>
             </Grid>

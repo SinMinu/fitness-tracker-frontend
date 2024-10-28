@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import '../styles.css';
 import { Box, Typography, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
 import { AuthContext } from '../context/AuthContext';
 
@@ -11,7 +10,6 @@ function Home() {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
                 alignItems: 'center',
                 minHeight: '100vh',
                 backgroundColor: '#f0f0f0',
@@ -26,13 +24,13 @@ function Home() {
                 운동을 기록하고 목표를 달성하세요!
             </Typography>
 
-            <Grid container spacing={4} justifyContent="center" sx={{ maxWidth: 900 }}> {/* maxWidth로 전체 너비 조정 */}
+            <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: '100%' }}>
                         <CardMedia
                             component="img"
                             height="140"
-                            image="/images/goal-setting.jpg"
+                            image="https://source.unsplash.com/featured/?fitness"
                             alt="목표 설정"
                         />
                         <CardContent>
@@ -46,11 +44,11 @@ function Home() {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: '100%' }}>
                         <CardMedia
                             component="img"
                             height="140"
-                            image="/images/workout.jpg"
+                            image="https://source.unsplash.com/featured/?workout"
                             alt="운동 기록"
                         />
                         <CardContent>
@@ -64,11 +62,11 @@ function Home() {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: '100%' }}>
                         <CardMedia
                             component="img"
                             height="140"
-                            image="/images/motivation.jpg"
+                            image="https://source.unsplash.com/featured/?motivation"
                             alt="목표 달성"
                         />
                         <CardContent>
@@ -88,7 +86,7 @@ function Home() {
                     variant="contained"
                     color="primary"
                     size="large"
-                    sx={{ mt: 5 }}
+                    sx={{ mt: 4 }}
                     href="/register"
                 >
                     시작하기

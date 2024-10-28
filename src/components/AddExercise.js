@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles.css';
 import { Box, Button, CircularProgress, Paper, TextField, Typography, MenuItem } from '@mui/material';
@@ -13,6 +13,13 @@ function AddExercise() {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // 오늘 날짜를 YYYY-MM-DD 형식으로 변환하여 기본값으로 설정
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        setExerciseDate(formattedDate);
+    }, []);
 
     // 운동 종류 목록
     const exerciseTypes = [
@@ -54,10 +61,10 @@ function AddExercise() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '90vh', // 화면에서 약간 줄임
+                height: '90vh',
             }}
         >
-            <Paper elevation={3} sx={{ padding: 3, maxWidth: 550 }}> {/* padding을 3으로 줄임 */}
+            <Paper elevation={3} sx={{ padding: 3, maxWidth: 550 }}>
                 <Typography variant="h4" component="h1" gutterBottom>
                     운동 기록 추가
                 </Typography>
