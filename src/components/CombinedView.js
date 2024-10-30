@@ -110,12 +110,14 @@ function CombinedView() {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ mt: 8 }}>
-            <Grid container spacing={3}>
+        <Container maxWidth="lg" sx={{ mt: 6, mb: 6 }}>
+            <Grid container spacing={4}>
                 {/* 캘린더 섹션 */}
                 <Grid item xs={12} md={6}>
-                    <Paper elevation={3} sx={{ padding: 4 }}>
-                        <Typography variant="h4" component="h1" gutterBottom>나의 캘린더</Typography>
+                    <Paper elevation={3} sx={{ padding: 3 }}>
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            나의 캘린더
+                        </Typography>
                         <Calendar
                             onChange={handleDateChange}
                             value={selectedDate}
@@ -132,17 +134,21 @@ function CombinedView() {
 
                 {/* 운동 기록 차트 섹션 */}
                 <Grid item xs={12} md={6}>
-                    <Paper elevation={3} sx={{ padding: 4 }}>
-                        <Typography variant="h4" component="h1" gutterBottom>운동 기록 차트</Typography>
+                    <Paper elevation={3} sx={{ padding: 3 }}>
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            운동 기록 차트
+                        </Typography>
                         <Bar data={chartData} />
                     </Paper>
                 </Grid>
 
                 {/* 운동 통계 섹션 */}
                 <Grid item xs={12}>
-                    <Paper elevation={3} sx={{ padding: 4, mt: 4 }}>
-                        <Typography variant="h4" component="h1" gutterBottom>운동 통계</Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                    <Paper elevation={3} sx={{ padding: 3, mt: 4 }}>
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            운동 통계
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-around', gap: 2 }}>
                             <CaloriesTrendChart period="일주일" />
                             <CaloriesTrendChart period="한달" />
                             <CaloriesTrendChart period="분기" />

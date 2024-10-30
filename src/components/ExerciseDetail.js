@@ -2,21 +2,42 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { TextField, Button, CircularProgress, Box, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Container, Paper, Button, CircularProgress, Box, Typography, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ShareExerciseRecord from './ShareExerciseRecord';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+// centerTextPlugin을 컴포넌트 외부에 정의하여 원하는 차트에만 적용
+const centerTextPlugin = {
+    id: 'centerText',
+    beforeDraw: (chart) => {
+        const { ctx, width, height } = chart;
+        ctx.save();
+        ctx.font = 'bold 16px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        const duration = chart.config.data.datasets[0].data[0];
+        const caloriesBurned = chart.config.data.datasets[1].data[0];
+
+        ctx.fillText(`소모 칼로리: ${caloriesBurned} kcal`, width / 2, height / 2 - 10);
+        ctx.fillText(`운동 시간: ${duration} 분`, width / 2, height / 2 + 20);
+        ctx.restore();
+    }
+};
 
 function ExerciseDetail() {
     const { recordId } = useParams();
     const { jwtToken } = useContext(AuthContext);
     const [exerciseRecord, setExerciseRecord] = useState(null);
-    const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [editing, setEditing] = useState(false);
     const navigate = useNavigate();
     const [feedback, setFeedback] = useState('');
+    const userId = localStorage.getItem('userId');
+    const [combinedChartData, setCombinedChartData] = useState(null);
 
     useEffect(() => {
         const fetchExerciseRecord = async () => {
@@ -65,7 +86,6 @@ function ExerciseDetail() {
 
     const handleSave = async () => {
         setLoading(true);
-        const userId = localStorage.getItem('userId');
 
         try {
             const response = await axios.put(
@@ -74,14 +94,62 @@ function ExerciseDetail() {
                 { headers: { Authorization: `Bearer ${jwtToken}` } }
             );
             alert('운동 기록이 성공적으로 수정되었습니다.');
-            setExerciseRecord(response.data);
-            generateFeedback(response.data);
+            const updatedRecord = response.data;
+            setExerciseRecord(updatedRecord);
+            generateFeedback(updatedRecord);
+            updateChartData(updatedRecord);  // 차트 데이터를 업데이트
             setEditing(false);
         } catch (error) {
             console.error('운동 기록 수정에 실패했습니다:', error);
         } finally {
             setLoading(false);
         }
+    };
+
+    const updateChartData = (record) => {
+        setCombinedChartData({
+            labels: ['운동 시간 (분)', '남은 시간', '소모 칼로리 (kcal)', '남은 칼로리'],
+            datasets: [
+                {
+                    data: [
+                        Math.min(record.duration, 60),
+                        60 - Math.min(record.duration, 60)
+                    ],
+                    backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(230, 230, 230, 0.4)'],
+                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(200, 200, 200, 0.2)'],
+                    borderWidth: 1,
+                    hoverOffset: 4,
+                    cutout: '60%',
+                },
+                {
+                    data: [
+                        Math.min(record.caloriesBurned, 500),
+                        500 - Math.min(record.caloriesBurned, 500)
+                    ],
+                    backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(230, 230, 230, 0.4)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(200, 200, 200, 0.2)'],
+                    borderWidth: 1,
+                    hoverOffset: 4,
+                },
+            ],
+        });
+    };
+
+    useEffect(() => {
+        if (exerciseRecord) {
+            updateChartData(exerciseRecord);
+        }
+    }, [exerciseRecord]);
+
+    const chartOptions = {
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                enabled: false,
+            },
+        },
     };
 
     const handleDelete = async () => {
@@ -103,33 +171,7 @@ function ExerciseDetail() {
 
     const safeValue = (value) => (value === null || value === undefined ? '' : value);
 
-    const durationChartData = {
-        labels: ['운동 시간 (분)'],
-        datasets: [
-            {
-                label: '운동 시간',
-                data: exerciseRecord ? [exerciseRecord.duration] : [],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-            },
-        ],
-    };
-
-    const caloriesChartData = {
-        labels: ['소모 칼로리 (kcal)'],
-        datasets: [
-            {
-                label: '소모 칼로리',
-                data: exerciseRecord ? [exerciseRecord.caloriesBurned] : [],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-            },
-        ],
-    };
-
-    if (!exerciseRecord) {
+    if (!exerciseRecord || !combinedChartData) {
         return (
             <Box display="flex" alignItems="center" justifyContent="center" height="80vh">
                 <CircularProgress />
@@ -139,18 +181,18 @@ function ExerciseDetail() {
     }
 
     return (
-        <div className="exercise-detail-container">
-            <h2 style={{ marginBottom: '20px' }}>운동 상세 정보</h2>
-            <div>
-                <p><strong>이름:</strong> {exerciseRecord.exerciseName}</p>
-                <p><strong>유형:</strong> {exerciseRecord.exerciseType}</p>
-                <p><strong>지속 시간:</strong> {exerciseRecord.duration} 분</p>
-                <p><strong>소모 칼로리:</strong> {exerciseRecord.caloriesBurned} kcal</p>
-                <p><strong>운동 장소:</strong> {exerciseRecord.location}</p>
-                <p><strong>사용한 장비:</strong> {exerciseRecord.equipment}</p>
-                <p><strong>운동 강도:</strong> {exerciseRecord.intensity}</p>
-                <p><strong>메모:</strong> {exerciseRecord.notes}</p>
-                <p style={{ fontWeight: 'bold', color: 'green' }}>운동 피드백: {feedback}</p>
+        <Container maxWidth="md" sx={{ mt: 4 }}>
+            <Paper elevation={3} sx={{ p: 4 }}>
+                <Typography variant="h4" gutterBottom>운동 상세 정보</Typography>
+                <Typography><strong>이름:</strong> {exerciseRecord.exerciseName}</Typography>
+                <Typography><strong>유형:</strong> {exerciseRecord.exerciseType}</Typography>
+                <Typography><strong>지속 시간:</strong> {exerciseRecord.duration} 분</Typography>
+                <Typography><strong>소모 칼로리:</strong> {exerciseRecord.caloriesBurned} kcal</Typography>
+                <Typography><strong>운동 장소:</strong> {exerciseRecord.location}</Typography>
+                <Typography><strong>사용한 장비:</strong> {exerciseRecord.equipment}</Typography>
+                <Typography><strong>운동 강도:</strong> {exerciseRecord.intensity}</Typography>
+                <Typography><strong>메모:</strong> {exerciseRecord.notes}</Typography>
+                <Typography style={{ fontWeight: 'bold', color: 'green' }}>운동 피드백: {feedback}</Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                     <Button
                         variant="contained"
@@ -169,96 +211,101 @@ function ExerciseDetail() {
                         삭제
                     </Button>
                 </Box>
+                <Dialog open={editing} onClose={() => setEditing(false)} maxWidth="sm" fullWidth>
+                    <DialogTitle>운동 기록 수정</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            label="이름"
+                            value={safeValue(exerciseRecord?.exerciseName)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, exerciseName: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="유형"
+                            value={safeValue(exerciseRecord?.exerciseType)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, exerciseType: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="지속 시간"
+                            type="number"
+                            value={safeValue(exerciseRecord?.duration)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, duration: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="소모 칼로리"
+                            type="number"
+                            value={safeValue(exerciseRecord?.caloriesBurned)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, caloriesBurned: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="운동 장소"
+                            value={safeValue(exerciseRecord?.location)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, location: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="사용한 장비"
+                            value={safeValue(exerciseRecord?.equipment)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, equipment: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="운동 강도"
+                            value={safeValue(exerciseRecord?.intensity)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, intensity: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="메모"
+                            value={safeValue(exerciseRecord?.notes)}
+                            onChange={(e) => setExerciseRecord({ ...exerciseRecord, notes: e.target.value })}
+                            fullWidth
+                            margin="normal"
+                            multiline
+                            rows={4}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleSave} color="primary" variant="contained">
+                            저장
+                        </Button>
+                        <Button
+                            onClick={() => setEditing(false)}
+                            color="secondary"
+                            variant="outlined"
+                            sx={{
+                                color: 'black',
+                                borderColor: 'black',
+                            }}
+                        >
+                            취소
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
                     <ShareExerciseRecord record={exerciseRecord} />
                 </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-                    <Box sx={{ flex: 1, mr: 2 }}>
-                        <h3>운동 시간 (분)</h3>
-                        <Bar data={durationChartData} />
-                    </Box>
-                    <Box sx={{ flex: 1, ml: 2 }}>
-                        <h3>소모 칼로리 (kcal)</h3>
-                        <Bar data={caloriesChartData} />
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                    <Box sx={{ width: '250px', height: '250px' }}>
+                        <Doughnut
+                            data={combinedChartData}
+                            options={chartOptions}
+                            plugins={[centerTextPlugin]}  // 여기서만 centerTextPlugin 사용
+                        />
                     </Box>
                 </Box>
-            </div>
-
-            {/* 수정 모달 */}
-            <Dialog open={editing} onClose={() => setEditing(false)} maxWidth="sm" fullWidth disableEnforceFocus>
-            <DialogTitle>운동 기록 수정</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        label="이름"
-                        value={safeValue(exerciseRecord.exerciseName)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, exerciseName: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="유형"
-                        value={safeValue(exerciseRecord.exerciseType)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, exerciseType: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="지속 시간"
-                        type="number"
-                        value={safeValue(exerciseRecord.duration)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, duration: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="소모 칼로리"
-                        type="number"
-                        value={safeValue(exerciseRecord.caloriesBurned)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, caloriesBurned: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="운동 장소"
-                        value={safeValue(exerciseRecord.location)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, location: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="사용한 장비"
-                        value={safeValue(exerciseRecord.equipment)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, equipment: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="운동 강도"
-                        value={safeValue(exerciseRecord.intensity)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, intensity: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="메모"
-                        value={safeValue(exerciseRecord.notes)}
-                        onChange={(e) => setExerciseRecord({ ...exerciseRecord, notes: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                        multiline
-                        rows={4}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleSave} color="primary" variant="contained">
-                        저장
-                    </Button>
-                    <Button onClick={() => setEditing(false)} color="secondary" variant="outlined">
-                        취소
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+            </Paper>
+        </Container>
     );
 }
 

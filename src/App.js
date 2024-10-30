@@ -17,31 +17,37 @@ import ExerciseDetail from './components/ExerciseDetail';
 import CalendarPage from './components/CalendarPage'; // 캘린더 페이지 추가
 import ExerciseChart from './components/CombinedView';
 import ExerciseRecommendations from './components/ExerciseRecommendations';
+import theme from './createTheme';
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
     return (
-        <AuthProvider>
-            <Router>
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/add-exercise" element={<AddExercise />} />
-                    <Route path="/exercise-chart" element={<ExerciseChart />} />
-                    <Route path="/exercise-records" element={<ExerciseRecords />} />
-                    <Route path="/recommendations" element={<ExerciseRecommendations />} />
-                    <Route path="/exercise-detail/:recordId" element={<ExerciseDetail />} />
-                    <Route path="/add-goal" element={<AddGoal />} />
-                    <Route path="/goal-records" element={<GoalRecords />} />
-                    <Route path="/goal-progress" element={<GoalProgress />} />
-                    <Route path="/edit-goal/:goalId" element={<EditGoal />} />
-                    <Route path="/notifications" element={<Notification />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/calendar" element={<CalendarPage />} />
-                </Routes>
-            </Router>
-        </AuthProvider>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AuthProvider>
+                <Router>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/add-exercise" element={<AddExercise />} />
+                        <Route path="/exercise-chart" element={<ExerciseChart />} />
+                        <Route path="/exercise-records" element={<ExerciseRecords />} />
+                        <Route path="/recommendations" element={<ExerciseRecommendations />} />
+                        <Route path="/exercise-detail/:recordId" element={<ExerciseDetail />} />
+                        <Route path="/add-goal" element={<AddGoal />} />
+                        <Route path="/goal-records" element={<GoalRecords />} />
+                        <Route path="/goal-progress" element={<GoalProgress />} />
+                        <Route path="/edit-goal/:goalId" element={<EditGoal />} />
+                        <Route path="/notifications" element={<Notification />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/calendar" element={<CalendarPage />} />
+                    </Routes>
+                </Router>
+            </AuthProvider>
+        </ThemeProvider>
     );
 }
 

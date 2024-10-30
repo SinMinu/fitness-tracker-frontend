@@ -1,827 +1,827 @@
-/* styles.css */
-.navbar {
-    background-color: #333;
-    padding: 1rem;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-}
-
-.navbar ul li {
-    color: white;
-}
-
-.navbar ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-.footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.content {
-    flex: 1;
-    padding: 20px;
-}
-
-/* 네비게이션 바 스타일 */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-/* 푸터 스타일 */
-.footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-}
-
-/* 버튼 스타일 */
-.button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-/* 카드 스타일 */
-.card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 폼 스타일 */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form label {
-    font-weight: bold;
-}
-
-/* styles.css */
-
-.home-container {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.home-title {
-    font-size: 2.5rem;
-    color: #333;
-}
-
-.home-description {
-    font-size: 1.2rem;
-    color: #555;
-}
-/* styles.css */
-
-.form-container {
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 50px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-.form-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-button:hover {
-    background-color: #0056b3;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f0f0f0;
-}
-
-/* 입력 폼 스타일 */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 300px;
-}
-
-/* 버튼 스타일 */
-button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* 제목 스타일 */
-h2 {
-    color: #333;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-.goal-records {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.goal-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.goal-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 300px;
-    transition: transform 0.3s;
-}
-
-.goal-card:hover {
-    transform: translateY(-5px);
-}
-
-.achieved {
-    border-color: #4caf50;
-    color: #4caf50;
-}
-
-.not-achieved {
-    border-color: #888;
-    color: #888;
-}
-.exercise-records {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.exercise-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.exercise-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: 300px;
-    transition: transform 0.3s;
-}
-
-.exercise-card:hover {
-    transform: translateY(-5px);
-}
-.profile-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.profile-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.profile-card:hover {
-    transform: translateY(-5px);
-}
-
-.profile-card input {
-    display: block;
-    margin-bottom: 10px;
-    padding: 8px;
-    width: calc(100% - 16px);
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.profile-card button {
-    margin-right: 10px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.profile-card button:hover {
-    background-color: #0056b3;
-}
-.logout-button {
-    background: none;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-    transition: color 0.3s;
-}
-
-.logout-button:hover {
-    color: #ff6b6b;
-}
-.login-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.login-input {
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.login-button {
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.login-button:hover {
-    background-color: #218838;
-}
-/* styles.css 추가 */
-.profile-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-.profile-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.profile-input {
-    padding: 10px;
-    border: 2px solid #007bff; /* 테두리 색상을 파란색으로 설정 */
-    border-radius: 5px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    width: calc(100% - 24px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* 프로필 인풋에 포커스 시 적용되는 스타일 */
-.profile-input:focus {
-    border-color: #0056b3; /* 포커스 시 테두리 색상 */
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
-}
-
-.update-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.update-button:hover {
-    background-color: #0056b3;
-}
-.notification-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.notification-list {
-    list-style: none;
-    padding: 0;
-}
-
-.notification-item {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-.unread {
-    font-weight: bold;
-    background-color: #f9e6e6; /* 연한 빨간색 배경으로 강조 */
-    border-left: 5px solid #ff0000; /* 왼쪽에 빨간색 선을 추가 */
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-}
-.exercise-detail-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.goal-task-list {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.task-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.create-task-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.create-task-button:hover {
-    background-color: #0056b3;
-}
-
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.task-item.completed {
-    text-decoration: line-through;
-    color: #888;
-}
-.goal-progress-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.goal-progress-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.progress-bar-container {
-    background-color: #e0e0e0;
-    border-radius: 25px;
-    overflow: hidden;
-    height: 25px;
-    margin-top: 10px;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: #4caf50;
-    text-align: center;
-    color: white;
-    line-height: 25px;
-    transition: width 0.5s ease-in-out;
-}
-
-.goal-task-list {
-    margin-top: 20px;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.task-list {
-    list-style: none;
-    padding: 0;
-}
-
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s;
-}
-
-.task-item.completed {
-    background: #d4edda;
-}
-
-.toggle-task-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.toggle-task-button:hover {
-    background-color: #0056b3;
-}
-.goal-progress-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.goal-progress-card h3 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-.goal-progress-container {
-    padding: 20px;
-}
-
-.chart-container {
-    max-width: 800px;
-    margin: 0 auto 30px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.goal-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.goal-progress-card {
-    background: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: calc(33.33% - 20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.goal-progress-card h3 {
-    margin: 0 0 10px;
-}
-
-.goal-progress-card p {
-    margin: 0;
-}
-.goal-progress-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.goal-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.goal-progress-card {
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 200px;
-    text-align: center;
-}
-
-.progress-bar {
-    background: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    height: 20px;
-    margin: 10px 0;
-}
-
-.progress-bar-fill {
-    background: #76c7c0;
-    height: 100%;
-    transition: width 0.4s ease-in-out;
-}
-
-.goal-details-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.goal-details-button:hover {
-    background: #0056b3;
-}
-/* Add Exercise and Add Goal Form Styles */
-.add-form-container {
-    width: 400px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-.add-form-container:hover {
-    transform: translateY(-5px);
-}
-
-.add-form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: 600;
-}
-
-.add-form-container input,
-.add-form-container textarea {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.add-form-container input:focus,
-.add-form-container textarea:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
-}
-
-.add-form-container button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.add-form-container button:hover {
-    background-color: #0056b3;
-}
-
-.goal-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: transform 0.3s ease;
-}
-
-/* 달성된 목표 카드 스타일 (블루 테마) */
-.goal-card.achieved {
-    background-color: #e0f7fa; /* 연한 블루 배경 */
-    color: #0277bd; /* 진한 블루 텍스트 */
-    border: 2px solid #01579b; /* 진한 블루 테두리 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
-    transform: scale(1.05); /* 살짝 확대 효과 */
-}
-
-/* 카드의 제목 스타일 */
-.goal-card h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-/* 달성된 목표 카드에서 제목 스타일 변경 */
-.goal-card.achieved h3 {
-    font-weight: bold;
-    text-decoration: underline; /* 강조하기 위해 밑줄 추가 */
-    color: #01579b; /* 진한 블루 */
-}
-
-/* 목표 카드에 마우스 올렸을 때 살짝 확대 */
-.goal-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* 캘린더 날짜의 텍스트 색상을 블랙으로 변경 */
-.react-calendar__tile {
-    color: black; /* 날짜 색상 블랙 */
-}
-
-/* 선택된 날짜 강조 */
-.react-calendar__tile--active {
-    background-color: #1976d2 !important; /* 선택된 날짜 배경색 */
-    color: white !important; /* 선택된 날짜 글자 색상 */
-}
-
-/* 캘린더 전체 배경색 */
-.react-calendar {
-    background-color: white; /* 캘린더 배경을 흰색으로 유지 */
-}
-/* 캘린더 날짜 및 년/월 선택 영역의 텍스트 색상을 블랙으로 변경 */
-.custom-calendar .react-calendar__tile,
-.custom-calendar .react-calendar__navigation button {
-    color: black;
-}
-
-/* 선택된 날짜 강조 */
-.custom-calendar .react-calendar__tile--active {
-    background-color: #1976d2 !important; /* 선택된 날짜 배경색 */
-    color: white !important; /* 선택된 날짜 글자 색상 */
-}
-/* 캘린더가 박스 내에서 알맞게 크기 조정 */
-.custom-calendar {
-    width: 100%; /* 부모 요소의 너비에 맞게 조정 */
-    max-width: 400px; /* 최대 너비를 설정하여 박스를 넘지 않도록 제한 */
-    margin: 0 auto; /* 가운데 정렬 */
-    height: auto; /* 높이는 자동으로 조정 */
-}
-/* 프로필 및 캘린더 박스의 크기 조정 */
-.profile-container .MuiPaper-root {
-    height: 100%;
-}
-.custom-calendar .react-calendar__tile {
-    position: relative;
-}
-
-.custom-calendar .react-calendar__tile div {
-    display: inline-block;
-    margin: 0 auto;
-}
-.goal-cards-container {
-    overflow-y: auto;
-    max-height: 500px;
-    padding-right: 10px; /* 여유 공간 추가 */
-}
-
-/* 스크롤바 숨기기 */
-.goal-cards-container::-webkit-scrollbar {
-    display: none;
-}
-
-.goal-cards-container {
-    -ms-overflow-style: none;  /* IE 및 Edge에서 스크롤바 숨기기 */
-    scrollbar-width: none;     /* Firefox에서 스크롤바 숨기기 */
-}
+/*!* styles.css *!*/
+/*.navbar {*/
+/*    background-color: #333;*/
+/*    padding: 1rem;*/
+/*}*/
+
+/*.navbar ul {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    gap: 1rem;*/
+/*}*/
+
+/*.navbar ul li {*/
+/*    color: white;*/
+/*}*/
+
+/*.navbar ul li a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.footer {*/
+/*    background-color: #333;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*    padding: 1rem;*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*}*/
+
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    background-color: #f5f5f5;*/
+/*    color: #333;*/
+/*}*/
+
+/*.app {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-height: 100vh;*/
+/*}*/
+
+/*.content {*/
+/*    flex: 1;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*!* 네비게이션 바 스타일 *!*/
+/*.navbar {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    padding: 10px 20px;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.navbar a {*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    margin: 0 10px;*/
+/*}*/
+
+/*.navbar a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*!* 푸터 스타일 *!*/
+/*.footer {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    text-align: center;*/
+/*    padding: 15px 0;*/
+/*}*/
+
+/*!* 버튼 스타일 *!*/
+/*.button {*/
+/*    background-color: #007BFF;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 10px 20px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 5px;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*!* 카드 스타일 *!*/
+/*.card {*/
+/*    background-color: #fff;*/
+/*    border-radius: 8px;*/
+/*    padding: 20px;*/
+/*    margin-bottom: 20px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*!* 폼 스타일 *!*/
+/*.form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 15px;*/
+/*}*/
+
+/*.form input {*/
+/*    padding: 10px;*/
+/*    font-size: 16px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.form label {*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*!* styles.css *!*/
+
+/*.home-container {*/
+/*    text-align: center;*/
+/*    margin-top: 50px;*/
+/*}*/
+
+/*.home-title {*/
+/*    font-size: 2.5rem;*/
+/*    color: #333;*/
+/*}*/
+
+/*.home-description {*/
+/*    font-size: 1.2rem;*/
+/*    color: #555;*/
+/*}*/
+/*!* styles.css *!*/
+
+/*.form-container {*/
+/*    width: 300px;*/
+/*    margin: 0 auto;*/
+/*    margin-top: 50px;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    background-color: #f9f9f9;*/
+/*}*/
+
+/*.form-title {*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px;*/
+/*    font-size: 1.8rem;*/
+/*}*/
+
+/*.form-input {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    margin: 10px 0;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.form-button {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.form-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    min-height: 100vh;*/
+/*    padding: 20px;*/
+/*    background-color: #f0f0f0;*/
+/*}*/
+
+/*!* 입력 폼 스타일 *!*/
+/*.form-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 15px;*/
+/*    padding: 20px;*/
+/*    background: #ffffff;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    border-radius: 8px;*/
+/*    width: 300px;*/
+/*}*/
+
+/*!* 버튼 스타일 *!*/
+/*button {*/
+/*    padding: 10px;*/
+/*    background-color: #4caf50;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease, transform 0.1s ease;*/
+/*}*/
+
+/*button:hover {*/
+/*    background-color: #45a049;*/
+/*}*/
+
+/*!* 제목 스타일 *!*/
+/*h2 {*/
+/*    color: #333;*/
+/*}*/
+
+/*button:active {*/
+/*    transform: scale(0.95);*/
+/*}*/
+/*.goal-records {*/
+/*    padding: 20px;*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.goal-cards-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 20px;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.goal-card {*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    padding: 15px;*/
+/*    width: 300px;*/
+/*    transition: transform 0.3s;*/
+/*}*/
+
+/*.goal-card:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+/*.achieved {*/
+/*    border-color: #4caf50;*/
+/*    color: #4caf50;*/
+/*}*/
+
+/*.not-achieved {*/
+/*    border-color: #888;*/
+/*    color: #888;*/
+/*}*/
+/*.exercise-records {*/
+/*    padding: 20px;*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.exercise-cards-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 20px;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.exercise-card {*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    padding: 15px;*/
+/*    width: 300px;*/
+/*    transition: transform 0.3s;*/
+/*}*/
+
+/*.exercise-card:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+/*.profile-container {*/
+/*    padding: 20px;*/
+/*    max-width: 600px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.profile-card {*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    padding: 15px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    transition: transform 0.3s;*/
+/*}*/
+
+/*.profile-card:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+/*.profile-card input {*/
+/*    display: block;*/
+/*    margin-bottom: 10px;*/
+/*    padding: 8px;*/
+/*    width: calc(100% - 16px);*/
+/*    border-radius: 4px;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
+
+/*.profile-card button {*/
+/*    margin-right: 10px;*/
+/*    padding: 10px 15px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.profile-card button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+/*.logout-button {*/
+/*    background: none;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    font-size: 1em;*/
+/*    transition: color 0.3s;*/
+/*}*/
+
+/*.logout-button:hover {*/
+/*    color: #ff6b6b;*/
+/*}*/
+/*.login-container {*/
+/*    width: 300px;*/
+/*    margin: 0 auto;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    background-color: #f9f9f9;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*    text-align: center;*/
+/*}*/
+
+/*.login-form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.login-input {*/
+/*    margin-bottom: 10px;*/
+/*    padding: 10px;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.login-button {*/
+/*    padding: 10px;*/
+/*    background-color: #28a745;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    font-size: 16px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.login-button:hover {*/
+/*    background-color: #218838;*/
+/*}*/
+/*!* styles.css 추가 *!*/
+/*.profile-container {*/
+/*    max-width: 400px;*/
+/*    margin: 0 auto;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    background-color: #f9f9f9;*/
+/*}*/
+
+/*.profile-form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.form-group {*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*label {*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 5px;*/
+/*    display: block;*/
+/*}*/
+
+/*.profile-input {*/
+/*    padding: 10px;*/
+/*    border: 2px solid #007bff; !* 테두리 색상을 파란색으로 설정 *!*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    margin-bottom: 10px;*/
+/*    width: calc(100% - 24px);*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*!* 프로필 인풋에 포커스 시 적용되는 스타일 *!*/
+/*.profile-input:focus {*/
+/*    border-color: #0056b3; !* 포커스 시 테두리 색상 *!*/
+/*    outline: none;*/
+/*    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);*/
+/*}*/
+
+/*.update-button {*/
+/*    padding: 10px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.update-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+/*.notification-container {*/
+/*    max-width: 600px;*/
+/*    margin: 20px auto;*/
+/*    padding: 20px;*/
+/*    background-color: #f9f9f9;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.notification-list {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.notification-item {*/
+/*    padding: 10px;*/
+/*    margin-bottom: 10px;*/
+/*    background-color: #ffffff;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 4px;*/
+/*}*/
+/*.unread {*/
+/*    font-weight: bold;*/
+/*    background-color: #f9e6e6; !* 연한 빨간색 배경으로 강조 *!*/
+/*    border-left: 5px solid #ff0000; !* 왼쪽에 빨간색 선을 추가 *!*/
+/*    padding: 10px;*/
+/*    margin-bottom: 5px;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*.exercise-detail-container {*/
+/*    max-width: 600px;*/
+/*    margin: 20px auto;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    background-color: #f9f9f9;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
+/*.goal-task-list {*/
+/*    margin-top: 20px;*/
+/*    padding: 15px;*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*}*/
+
+/*.task-input {*/
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.create-task-button {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.create-task-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.task-item {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    padding: 10px;*/
+/*    border-bottom: 1px solid #ccc;*/
+/*}*/
+
+/*.task-item.completed {*/
+/*    text-decoration: line-through;*/
+/*    color: #888;*/
+/*}*/
+/*.goal-progress-container {*/
+/*    padding: 20px;*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.goal-progress-card {*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    padding: 20px;*/
+/*    margin-bottom: 20px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.progress-bar-container {*/
+/*    background-color: #e0e0e0;*/
+/*    border-radius: 25px;*/
+/*    overflow: hidden;*/
+/*    height: 25px;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.progress-bar {*/
+/*    height: 100%;*/
+/*    background-color: #4caf50;*/
+/*    text-align: center;*/
+/*    color: white;*/
+/*    line-height: 25px;*/
+/*    transition: width 0.5s ease-in-out;*/
+/*}*/
+
+/*.goal-task-list {*/
+/*    margin-top: 20px;*/
+/*    background: #f9f9f9;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.task-list {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.task-item {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 10px;*/
+/*    background: #fff;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 10px;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.task-item.completed {*/
+/*    background: #d4edda;*/
+/*}*/
+
+/*.toggle-task-button {*/
+/*    padding: 5px 10px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.toggle-task-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+/*.goal-progress-card {*/
+/*    background-color: #f9f9f9;*/
+/*    padding: 15px;*/
+/*    margin: 10px 0;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.goal-progress-card h3 {*/
+/*    margin: 0;*/
+/*    font-size: 1.5rem;*/
+/*}*/
+/*.goal-progress-container {*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.chart-container {*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto 30px;*/
+/*    padding: 20px;*/
+/*    background-color: #f9f9f9;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.goal-cards-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 20px;*/
+/*}*/
+
+/*.goal-progress-card {*/
+/*    background: #ffffff;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 8px;*/
+/*    padding: 20px;*/
+/*    width: calc(33.33% - 20px);*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    text-align: center;*/
+/*}*/
+
+/*.goal-progress-card h3 {*/
+/*    margin: 0 0 10px;*/
+/*}*/
+
+/*.goal-progress-card p {*/
+/*    margin: 0;*/
+/*}*/
+/*.goal-progress-container {*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto;*/
+/*    padding: 20px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.goal-cards-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 20px;*/
+/*    justify-content: center;*/
+/*    margin-top: 20px;*/
+/*}*/
+
+/*.goal-progress-card {*/
+/*    background: #f9f9f9;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    padding: 20px;*/
+/*    width: 200px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.progress-bar {*/
+/*    background: #e0e0e0;*/
+/*    border-radius: 8px;*/
+/*    overflow: hidden;*/
+/*    height: 20px;*/
+/*    margin: 10px 0;*/
+/*}*/
+
+/*.progress-bar-fill {*/
+/*    background: #76c7c0;*/
+/*    height: 100%;*/
+/*    transition: width 0.4s ease-in-out;*/
+/*}*/
+
+/*.goal-details-button {*/
+/*    background: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 8px 12px;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background 0.3s ease;*/
+/*}*/
+
+/*.goal-details-button:hover {*/
+/*    background: #0056b3;*/
+/*}*/
+/*!* Add Exercise and Add Goal Form Styles *!*/
+/*.add-form-container {*/
+/*    width: 400px;*/
+/*    margin: 40px auto;*/
+/*    padding: 30px;*/
+/*    background-color: #ffffff;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);*/
+/*    transition: transform 0.3s ease;*/
+/*}*/
+/*.add-form-container:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+/*.add-form-container h2 {*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px;*/
+/*    color: #333;*/
+/*    font-weight: 600;*/
+/*}*/
+
+/*.add-form-container input,*/
+/*.add-form-container textarea {*/
+/*    width: calc(100% - 20px);*/
+/*    padding: 12px;*/
+/*    margin-bottom: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);*/
+/*}*/
+
+/*.add-form-container input:focus,*/
+/*.add-form-container textarea:focus {*/
+/*    border-color: #007bff;*/
+/*    outline: none;*/
+/*    box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);*/
+/*}*/
+
+/*.add-form-container button {*/
+/*    width: 100%;*/
+/*    padding: 12px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*    font-size: 16px;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.add-form-container button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.goal-card {*/
+/*    border: 1px solid #ccc;*/
+/*    padding: 10px;*/
+/*    margin: 10px;*/
+/*    border-radius: 8px;*/
+/*    background-color: #f9f9f9;*/
+/*    transition: transform 0.3s ease;*/
+/*}*/
+
+/*!* 달성된 목표 카드 스타일 (블루 테마) *!*/
+/*.goal-card.achieved {*/
+/*    background-color: #e0f7fa; !* 연한 블루 배경 *!*/
+/*    color: #0277bd; !* 진한 블루 텍스트 *!*/
+/*    border: 2px solid #01579b; !* 진한 블루 테두리 *!*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); !* 가벼운 그림자 *!*/
+/*    transform: scale(1.05); !* 살짝 확대 효과 *!*/
+/*}*/
+
+/*!* 카드의 제목 스타일 *!*/
+/*.goal-card h3 {*/
+/*    font-size: 1.5em;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*!* 달성된 목표 카드에서 제목 스타일 변경 *!*/
+/*.goal-card.achieved h3 {*/
+/*    font-weight: bold;*/
+/*    text-decoration: underline; !* 강조하기 위해 밑줄 추가 *!*/
+/*    color: #01579b; !* 진한 블루 *!*/
+/*}*/
+
+/*!* 목표 카드에 마우스 올렸을 때 살짝 확대 *!*/
+/*.goal-card:hover {*/
+/*    transform: scale(1.03);*/
+/*    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+/*!* 캘린더 날짜의 텍스트 색상을 블랙으로 변경 *!*/
+/*.react-calendar__tile {*/
+/*    color: black; !* 날짜 색상 블랙 *!*/
+/*}*/
+
+/*!* 선택된 날짜 강조 *!*/
+/*.react-calendar__tile--active {*/
+/*    background-color: #1976d2 !important; !* 선택된 날짜 배경색 *!*/
+/*    color: white !important; !* 선택된 날짜 글자 색상 *!*/
+/*}*/
+
+/*!* 캘린더 전체 배경색 *!*/
+/*.react-calendar {*/
+/*    background-color: white; !* 캘린더 배경을 흰색으로 유지 *!*/
+/*}*/
+/*!* 캘린더 날짜 및 년/월 선택 영역의 텍스트 색상을 블랙으로 변경 *!*/
+/*.custom-calendar .react-calendar__tile,*/
+/*.custom-calendar .react-calendar__navigation button {*/
+/*    color: black;*/
+/*}*/
+
+/*!* 선택된 날짜 강조 *!*/
+/*.custom-calendar .react-calendar__tile--active {*/
+/*    background-color: #1976d2 !important; !* 선택된 날짜 배경색 *!*/
+/*    color: white !important; !* 선택된 날짜 글자 색상 *!*/
+/*}*/
+/*!* 캘린더가 박스 내에서 알맞게 크기 조정 *!*/
+/*.custom-calendar {*/
+/*    width: 100%; !* 부모 요소의 너비에 맞게 조정 *!*/
+/*    max-width: 400px; !* 최대 너비를 설정하여 박스를 넘지 않도록 제한 *!*/
+/*    margin: 0 auto; !* 가운데 정렬 *!*/
+/*    height: auto; !* 높이는 자동으로 조정 *!*/
+/*}*/
+/*!* 프로필 및 캘린더 박스의 크기 조정 *!*/
+/*.profile-container .MuiPaper-root {*/
+/*    height: 100%;*/
+/*}*/
+/*.custom-calendar .react-calendar__tile {*/
+/*    position: relative;*/
+/*}*/
+
+/*.custom-calendar .react-calendar__tile div {*/
+/*    display: inline-block;*/
+/*    margin: 0 auto;*/
+/*}*/
+/*.goal-cards-container {*/
+/*    overflow-y: auto;*/
+/*    max-height: 500px;*/
+/*    padding-right: 10px; !* 여유 공간 추가 *!*/
+/*}*/
+
+/*!* 스크롤바 숨기기 *!*/
+/*.goal-cards-container::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
+
+/*.goal-cards-container {*/
+/*    -ms-overflow-style: none;  !* IE 및 Edge에서 스크롤바 숨기기 *!*/
+/*    scrollbar-width: none;     !* Firefox에서 스크롤바 숨기기 *!*/
+/*}*/
