@@ -825,3 +825,19 @@
 /*    -ms-overflow-style: none;  !* IE 및 Edge에서 스크롤바 숨기기 *!*/
 /*    scrollbar-width: none;     !* Firefox에서 스크롤바 숨기기 *!*/
 /*}*/
+
+.notification-settings-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.notification-settings-item {
+    margin-bottom: 15px;
+}
+
+.notification-settings-item label {
+    font-size: 16px;
+}

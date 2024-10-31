@@ -20,6 +20,7 @@ import ExerciseRecommendations from './components/ExerciseRecommendations';
 import theme from './createTheme';
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import NotificationSettings from './components/NotificationSettings';
 
 function App() {
     return (
@@ -44,6 +45,7 @@ function App() {
                         <Route path="/notifications" element={<Notification />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/calendar" element={<CalendarPage />} />
+                        <Route path="/notification-settings" element={<NotificationSettings />} />
                     </Routes>
                 </Router>
             </AuthProvider>

@@ -14,6 +14,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
 
 function Navbar() {
     const { isAuthenticated, logout, user, jwtToken } = useContext(AuthContext);
@@ -22,23 +24,28 @@ function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
 
     useEffect(() => {
-        const fetchNotifications = async () => {
-            if (isAuthenticated && user && jwtToken) {
-                try {
-                    const response = await axios.get(`http://localhost:8080/api/notifications/user/${user.id}`, {
-                        headers: {
-                            Authorization: `Bearer ${jwtToken}`,
-                        },
-                    });
-                    setNotifications(response.data);
-                } catch (error) {
-                    console.error('Failed to fetch notifications:', error);
-                }
+        if (!user || !user.id) return;
+
+        const socket = new SockJS('http://localhost:8080/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, () => {
+            console.log("Connected to WebSocket");
+
+            stompClient.subscribe(`/topic/notifications/${user.id}`, (message) => {
+                const newNotification = JSON.parse(message.body);
+                setNotifications((prevNotifications) => [newNotification, ...prevNotifications]);
+            });
+        });
+
+        return () => {
+            if (stompClient.connected) {
+                stompClient.disconnect(() => {
+                    console.log("Disconnected from WebSocket");
+                });
             }
         };
-
-        fetchNotifications();
-    }, [isAuthenticated, user, jwtToken]);
+    }, [user?.id]);
 
     const handleLogout = () => {
         logout();
@@ -79,7 +86,6 @@ function Navbar() {
                         피트니스 트래커
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 2 }}>
-                        {/* 그룹 1: 일반 */}
                         <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#f0f0f0' }}>
                             <Button color="inherit" component={Link} to="/">홈</Button>
                         </Paper>
@@ -91,26 +97,23 @@ function Navbar() {
                             </Paper>
                         ) : (
                             <>
-                                {/* 그룹 2: 운동 관련 */}
                                 <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#e0f7fa' }}>
                                     <Button color="inherit" component={Link} to="/add-exercise">운동 추가</Button>
                                     <Button color="inherit" component={Link} to="/exercise-records">운동 기록</Button>
-                                    <Button color="inherit" component={Link} to="/exercise-chart">운동 기록 차트</Button> {/* 차트 추가 */}
+                                    <Button color="inherit" component={Link} to="/exercise-chart">운동 기록 차트</Button>
                                     <Button color="inherit" component={Link} to="/recommendations">추천 운동</Button>
                                 </Paper>
 
-                                {/* 그룹 3: 목표 관련 */}
                                 <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#ffe0b2' }}>
                                     <Button color="inherit" component={Link} to="/add-goal">목표 추가</Button>
                                     <Button color="inherit" component={Link} to="/goal-records">목표 기록</Button>
-                                    {/*<Button color="inherit" component={Link} to="/goal-progress">목표 진행 상황</Button>*/}
                                 </Paper>
 
-                                {/* 그룹 4: 프로필 및 알림 */}
                                 <Paper elevation={3} sx={{ padding: '0 10px', backgroundColor: '#f3e5f5' }}>
                                     <Button color="inherit" component={Link} to="/profile">프로필</Button>
+                                    <Button color="inherit" component={Link} to="/notification-settings">알림 설정</Button> {/* 알림 설정 페이지 추가 */}
                                     <IconButton color="inherit" onClick={handleMenuOpen}>
-                                        <Badge badgeContent={notifications.length} color="secondary">
+                                        <Badge badgeContent={notifications.filter(n => !n.isRead).length} color="secondary">
                                             <NotificationsIcon />
                                         </Badge>
                                     </IconButton>
